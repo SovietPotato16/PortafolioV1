@@ -26,27 +26,28 @@ const translations = {
       craft: 'Herramientas',
       journey: 'Trayectoria', 
       manifesto: 'Manifiesto',
-      laboratory: 'Laboratorio',
+      projects: 'Proyectos',
       blog: 'Blog',
       contact: 'Contacto'
     },
     hero: {
       greeting: 'Hola, soy',
       name: 'Saúl Hinojosa',
-      title: 'Ingeniero de Software',
-      subtitle: 'Especializado en Data Science, Python, LLMs y desarrollo web. Transformando datos en soluciones inteligentes.',
+      title: 'Ingeniero en Software',
+      subtitle: 'Especializado en Data Science, Python, AI, LLMs y desarrollo web. Transformando datos en soluciones inteligentes.',
       manifesto: 'Mi Manifiesto',
-      laboratory: 'Ver Laboratorio'
+      projects: 'Ver Proyectos'
     },
     about: {
       title: 'Sobre Mí',
-      subtitle: 'Ingeniero apasionado por la tecnología y la innovación',
+      subtitle: 'Programador apasionado por la tecnología y la innovación',
       description: 'Soy un desarrollador full-stack especializado en ciencia de datos e inteligencia artificial. Mi pasión radica en crear soluciones tecnológicas que resuelvan problemas reales y generen impacto positivo.',
       highlights: [
-        'Más de 5 años de experiencia en desarrollo',
-        'Especialista en Python y JavaScript',
-        'Experto en modelos de Machine Learning',
-        'Líder de equipos técnicos'
+        'Más de 3 años de experiencia en desarrollo en entornos profesionales',
+        'Especialista en Python, APIs, LLMs, Data Science y desarrollo web',
+        'Pasion por tecnología y desarrollo',
+        'Líder de equipos técnicos', 
+        'Atento a las nuevas tecnologías y tendencias',
       ]
     },
     journey: {
@@ -55,96 +56,112 @@ const translations = {
       experiences: [
         {
           type: 'work',
-          year: '2023 - Presente',
-          title: 'Senior Data Scientist',
-          company: 'TechCorp Solutions',
+          year: '2024 - Presente',
+          title: 'Data Scientist Intern',
+          company: 'Santander Bank Mexico',
           location: 'Ciudad de México, MX',
-          description: 'Lidero el desarrollo de modelos de ML para optimización de procesos empresariales.',
+          description: 'Liderando iniciativas de ciencia de datos y machine learning en el sector bancario.',
           achievements: [
-            'Implementé modelos que mejoraron la eficiencia en 40%',
-            'Lideré un equipo de 5 científicos de datos',
-            'Desarrollé pipelines de ML en producción'
+            'Lideré un equipo de interns en competencia interna tipo hackathon',
+            'Implementé pipelines de NLP y análisis de sentimientos en datos transaccionales y redes sociales',
+            'Construí modelos predictivos usando técnicas de Machine Learning',
+            'Desarrollé algoritmos de web scraping para extraer opiniones de usuarios',
+            'Extraje y geocodifiqué datos geográficos de sucursales a través de APIs'
           ],
-          tech: ['Python', 'TensorFlow', 'AWS', 'Docker']
+          tech: ['Python', 'NLP', 'Machine Learning', 'Web Scraping', 'APIs', 'Sentiment Analysis'],
+          logo: '/Santander.png'
+        },
+        {
+          type: 'work',
+          year: '2023 - 2024',
+          title: 'Data Analyst',
+          company: 'INE (Instituto Nacional Electoral)',
+          location: 'Toluca, MX',
+          description: 'Análisis de datos y automatización de procesos para el sector electoral público.',
+          achievements: [
+            'Diseñé e implementé sistemas organizacionales para gestión de inventarios',
+            'Desarrollé aplicaciones Python para automatizar procesos administrativos y analíticos',
+            'Calculé y visualicé estadísticas clave para la toma de decisiones operacionales',
+            'Mejoré la eficiencia de procesos mediante automatización'
+          ],
+          tech: ['Python', 'SQL', 'Data Visualization', 'Process Automation', 'Analytics'],
+          logo: '/Inelogo.webp'
         },
         {
           type: 'work',
           year: '2021 - 2023',
-          title: 'Full Stack Developer',
-          company: 'InnovateLab',
-          location: 'Guadalajara, MX',
-          description: 'Desarrollé aplicaciones web completas usando tecnologías modernas.',
-          achievements: [
-            'Creé 15+ aplicaciones web de alto rendimiento',
-            'Reduje el tiempo de carga en 60%',
-            'Implementé arquitecturas escalables'
-          ],
-          tech: ['React', 'Node.js', 'PostgreSQL', 'MongoDB']
-        },
-        {
-          type: 'education',
-          year: '2019 - 2021',
-          title: 'Maestría en Ciencias de la Computación',
-          company: 'Universidad Tecnológica',
+          title: 'Data Analyst (Internship)',
+          company: 'DiDi',
           location: 'Ciudad de México, MX',
-          description: 'Especialización en Inteligencia Artificial y Machine Learning.',
+          description: 'Análisis de datos de movilidad y comportamiento de usuarios en plataforma de transporte.',
           achievements: [
-            'Tesis sobre redes neuronales profundas',
-            'Promedio de 9.5/10',
-            'Publicación en conferencia internacional'
+            'Desarrollé análisis de patrones de customer journey y comportamiento de usuarios',
+            'Proporcioné insights accionables para mejora de servicios',
+            'Desarrollé estrategias para mejorar rendimiento de servicios de delivery y transporte',
+            'Revisé y refactoricé código Python y SQL para garantizar eficiencia y calidad'
           ],
-          tech: ['Python', 'PyTorch', 'Research', 'Statistics']
+          tech: ['Python', 'SQL', 'Customer Analytics', 'Behavioral Analysis', 'Transportation Data'],
+          logo: '/DiDi.png'
         },
         {
           type: 'work',
-          year: '2018 - 2021',
-          title: 'Junior Developer',
-          company: 'StartupTech',
-          location: 'Monterrey, MX',
-          description: 'Primeros pasos en el desarrollo profesional de software.',
+          year: '2022 - 2023',
+          title: 'Voluntario del Programa de Intercambios',
+          company: 'AFS (American Field Service)',
+          location: 'Estado de México, MX',
+          description: 'Liderazgo en programas de intercambio cultural internacional y desarrollo de iniciativas comunitarias para la integración social.',
           achievements: [
-            'Desarrollé mi primera aplicación en producción',
-            'Aprendí metodologías ágiles',
-            'Contribuí a proyectos open source'
+            'Lideré eventos de diseminación cultural para estudiantes de intercambio internacional',
+            'Organicé y facilité simulaciones de discusión tipo ONU para desarrollo de habilidades diplomáticas',
+            'Participé activamente en programas de crecimiento social y desarrollo comunitario',
+            'Promovió la integración cultural y el entendimiento internacional entre comunidades',
+            'Desarrollé habilidades de liderazgo y comunicación intercultural en entornos diversos'
           ],
-          tech: ['JavaScript', 'HTML/CSS', 'Git', 'Linux']
+          tech: ['Leadership', 'Cultural Exchange', 'Community Development', 'Public Speaking', 'International Relations'],
+          logo: '/AFS.webp'
+        },
+        {
+          type: 'education',
+          year: '2024',
+          title: 'Ingeniería en Software',
+          company: 'Universidad Autónoma del Estado de México',
+          location: 'Estado de México, MX',
+          description: 'Formación integral en desarrollo de software e ingeniería de sistemas.',
+          achievements: [
+            'Graduado en Diciembre 2024',
+            'Especialización en ciencia de datos y machine learning',
+            'Proyectos prácticos con tecnologías modernas',
+            'Enfoque en metodologías ágiles y desarrollo profesional'
+          ],
+          tech: ['Software Engineering', 'Data Science', 'Machine Learning', 'Agile/Scrum'],
+          logo: '/Uaemex.png'
         }
       ]
     },
     manifesto: {
       title: 'El Arte del Código',
       philosophy: 'Filosofía',
-      philosophyText: 'Creo que cada línea de código es un verso, cada algoritmo una sinfonía, y cada proyecto una obra maestra esperando ser creada. La programación es mi forma de crear y resolver problemas complejos.',
+      philosophyText: 'Me apasiona la computación y las infinitas posibilidades que ofrece para crear soluciones. Cada problema es una oportunidad de aprender algo nuevo, y cada línea de código me acerca más a construir herramientas que realmente impacten positivamente la vida de las personas.',
       vision: 'Visión',
       visionText: 'En la intersección entre la tecnología y la creatividad humana, construyo puentes hacia el futuro. Cada proyecto es una exploración de lo posible, una pregunta formulada al universo digital.',
       mission: 'Misión',
-      missionText: 'Transformar la complejidad en claridad, el caos en patrones, y las ideas en realidad. Mi código no solo resuelve problemas, sino que revela nuevas posibilidades en el mundo digital.',
-      domains: 'Dominios de Expertise',
-      domainsList: [
-        'Desarrollo Full-Stack',
-        'Ciencia de Datos & Analytics',
-        'Inteligencia Artificial & ML', 
-        'Modelos de Lenguaje (LLMs)',
-        'Automatización de Procesos',
-        'Ciberseguridad & Hacking Ético',
-        'Arquitectura de Software',
-        'DevOps & Cloud Computing'
-      ]
+      missionText: 'Transformar la complejidad en claridad, el caos en patrones, y las ideas en realidad. Mi código no solo resuelve problemas, sino que revela nuevas posibilidades en el mundo digital.'
     },
     craft: {
       title: 'Herramientas & Tecnologías',
       subtitle: 'Stack tecnológico forjado en la experiencia'
     },
-    laboratory: {
-      title: 'Laboratorio de Experimentos',
+    projects: {
+      title: 'Proyectos',
       subtitle: 'Donde las ideas toman forma digital',
       viewExperiment: 'Explorar',
+      clickToVisit: 'Haz clic para visitar el proyecto',
+      viewProject: 'Ver Proyecto',
       categories: {
         all: 'Todo',
         datascience: 'Data Science',
         web: 'Web',
-        ai: 'IA',
-        security: 'Seguridad'
+        ai: 'IA'
       }
     },
     blog: {
@@ -175,7 +192,7 @@ const translations = {
       craft: 'Tools',
       journey: 'Journey',
       manifesto: 'Manifesto',
-      laboratory: 'Laboratory', 
+      projects: 'Projects', 
       blog: 'Blog',
       contact: 'Contact'
     },
@@ -185,17 +202,18 @@ const translations = {
       title: 'Software Engineer',
       subtitle: 'Specialized in Data Science, Python, LLMs and web development. Transforming data into intelligent solutions.',
       manifesto: 'My Manifesto',
-      laboratory: 'View Laboratory'
+      projects: 'View Projects'
     },
     about: {
       title: 'About Me',
       subtitle: 'Engineer passionate about technology and innovation',
       description: 'I\'m a full-stack developer specialized in data science and artificial intelligence. My passion lies in creating technological solutions that solve real problems and generate positive impact.',
       highlights: [
-        'Over 5 years of development experience',
-        'Python and JavaScript specialist',
-        'Machine Learning models expert',
-        'Technical team leader'
+        'Over 3 years of development experience in professional environments',
+        'Specialist in Python, APIs, LLMs, Data Science and web development',
+        'Passion for technology and development',
+        'Technical team leader',
+        'Attentive to new technologies and trends',
       ]
     },
     journey: {
@@ -204,96 +222,112 @@ const translations = {
       experiences: [
         {
           type: 'work',
-          year: '2023 - Present',
-          title: 'Senior Data Scientist',
-          company: 'TechCorp Solutions',
+          year: '2024 - Present',
+          title: 'Data Scientist Intern',
+          company: 'Santander Bank Mexico',
           location: 'Mexico City, MX',
-          description: 'Leading ML model development for business process optimization.',
+          description: 'Leading data science and machine learning initiatives in the banking sector.',
           achievements: [
-            'Implemented models that improved efficiency by 40%',
-            'Led a team of 5 data scientists',
-            'Developed production ML pipelines'
+            'Led a team of interns through an internal hackathon-like competition',
+            'Implemented NLP pipelines and sentiment analysis on transactional and social media data',
+            'Built predictive models using Machine Learning techniques',
+            'Developed web scraping algorithms to extract and structure user opinions',
+            'Extracted and geocoded branch geographic data through APIs'
           ],
-          tech: ['Python', 'TensorFlow', 'AWS', 'Docker']
+          tech: ['Python', 'NLP', 'Machine Learning', 'Web Scraping', 'APIs', 'Sentiment Analysis'],
+          logo: '/Santander.png'
+        },
+        {
+          type: 'work',
+          year: '2023 - 2024',
+          title: 'Data Analyst',
+          company: 'INE (National Electoral Institute)',
+          location: 'Toluca, MX',
+          description: 'Data analysis and process automation for the public electoral sector.',
+          achievements: [
+            'Designed and implemented organizational systems for warehouse inventory management',
+            'Developed Python applications to automate administrative and analytical processes',
+            'Calculated and visualized key statistics for operational decision-making',
+            'Improved process efficiency through automation'
+          ],
+          tech: ['Python', 'SQL', 'Data Visualization', 'Process Automation', 'Analytics'],
+          logo: '/Inelogo.webp'
         },
         {
           type: 'work',
           year: '2021 - 2023',
-          title: 'Full Stack Developer',
-          company: 'InnovateLab',
-          location: 'Guadalajara, MX',
-          description: 'Developed complete web applications using modern technologies.',
-          achievements: [
-            'Created 15+ high-performance web applications',
-            'Reduced loading time by 60%',
-            'Implemented scalable architectures'
-          ],
-          tech: ['React', 'Node.js', 'PostgreSQL', 'MongoDB']
-        },
-        {
-          type: 'education',
-          year: '2019 - 2021',
-          title: 'Master in Computer Science',
-          company: 'Technological University',
+          title: 'Data Analyst (Internship)',
+          company: 'DiDi',
           location: 'Mexico City, MX',
-          description: 'Specialization in Artificial Intelligence and Machine Learning.',
+          description: 'Mobility data analysis and user behavior insights for transportation platform.',
           achievements: [
-            'Thesis on deep neural networks',
-            'GPA of 9.5/10',
-            'Publication in international conference'
+            'Developed customer journey pattern analysis and user behavior projects',
+            'Provided actionable insights for service improvement',
+            'Developed strategies to improve delivery and transportation service performance',
+            'Reviewed and refactored Python and SQL code to ensure efficiency and quality'
           ],
-          tech: ['Python', 'PyTorch', 'Research', 'Statistics']
+          tech: ['Python', 'SQL', 'Customer Analytics', 'Behavioral Analysis', 'Transportation Data'],
+          logo: '/DiDi.png'
         },
         {
           type: 'work',
-          year: '2018 - 2021',
-          title: 'Junior Developer',
-          company: 'StartupTech',
-          location: 'Monterrey, MX',
-          description: 'First steps in professional software development.',
+          year: '2022 - 2023',
+          title: 'Exchange Program Volunteer',
+          company: 'AFS (American Field Service)',
+          location: 'Estado de México, MX',
+          description: 'Leadership in international cultural exchange programs and development of community initiatives for social integration.',
           achievements: [
-            'Developed my first production application',
-            'Learned agile methodologies',
-            'Contributed to open source projects'
+            'Led cultural dissemination events for international exchange students',
+            'Organized and facilitated UN-style discussion simulations for diplomatic skills development',
+            'Actively participated in social growth and community development programs',
+            'Promoted cultural integration and international understanding between communities',
+            'Developed leadership and intercultural communication skills in diverse environments'
           ],
-          tech: ['JavaScript', 'HTML/CSS', 'Git', 'Linux']
+          tech: ['Leadership', 'Cultural Exchange', 'Community Development', 'Public Speaking', 'International Relations'],
+          logo: '/AFS.webp'
+        },
+        {
+          type: 'education',
+          year: '2024',
+          title: 'Software Engineering',
+          company: 'Autonomous University of Mexico State',
+          location: 'Estado de México, MX',
+          description: 'Comprehensive training in software development and systems engineering.',
+          achievements: [
+            'Graduated in December 2024',
+            'Specialization in data science and machine learning',
+            'Practical projects with modern technologies',
+            'Focus on agile methodologies and professional development'
+          ],
+          tech: ['Software Engineering', 'Data Science', 'Machine Learning', 'Agile/Scrum'],
+          logo: '/Uaemex.png'
         }
       ]
     },
     manifesto: {
       title: 'The Art of Code',
       philosophy: 'Philosophy',
-      philosophyText: 'I believe every line of code is a verse, every algorithm a symphony, and every project a masterpiece waiting to be created. Programming is my way of creating and solving complex problems.',
+      philosophyText: 'I\'m passionate about computing and the endless possibilities it offers to create solutions. Every problem is an opportunity to learn something new, and each line of code brings me closer to building tools that truly make a positive impact on people\'s lives.',
       vision: 'Vision',
       visionText: 'At the intersection of technology and human creativity, I build bridges to the future. Each project is an exploration of the possible, a question posed to the digital universe.',
       mission: 'Mission',
-      missionText: 'Transform complexity into clarity, chaos into patterns, and ideas into reality. My code doesn\'t just solve problems—it reveals new possibilities in the digital world.',
-      domains: 'Domains of Expertise',
-      domainsList: [
-        'Full-Stack Development',
-        'Data Science & Analytics',
-        'Artificial Intelligence & ML',
-        'Language Models (LLMs)',
-        'Process Automation',
-        'Cybersecurity & Ethical Hacking',
-        'Software Architecture',
-        'DevOps & Cloud Computing'
-      ]
+      missionText: 'Transform complexity into clarity, chaos into patterns, and ideas into reality. My code doesn\'t just solve problems—it reveals new possibilities in the digital world.'
     },
     craft: {
       title: 'Tools & Technologies',
       subtitle: 'Tech stack forged through experience'
     },
-    laboratory: {
-      title: 'Experiment Laboratory',
+    projects: {
+      title: 'Projects',
       subtitle: 'Where ideas take digital form',
       viewExperiment: 'Explore',
+      clickToVisit: 'Click to visit the project',
+      viewProject: 'View Project',
       categories: {
         all: 'All',
         datascience: 'Data Science',
         web: 'Web',
-        ai: 'AI',
-        security: 'Security'
+        ai: 'AI'
       }
     },
     blog: {
@@ -468,7 +502,7 @@ function App() {
   // Scroll tracking y control del menú móvil
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ['hero', 'about', 'craft', 'journey', 'manifesto', 'laboratory', 'blog', 'contact'];
+      const sections = ['hero', 'about', 'craft', 'journey', 'manifesto', 'projects', 'blog', 'contact'];
       const scrollPosition = window.scrollY + 150; // Aumentamos offset para mejor detección
 
       // Buscar la sección actual de forma más precisa
@@ -564,63 +598,74 @@ function App() {
 
   const techStack = [
     { name: 'Python', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/python/python-original.svg', category: 'language' },
+    { name: 'SQL', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mysql/mysql-original.svg', category: 'database' },
     { name: 'JavaScript', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg', category: 'language' },
+    { name: 'Bash', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/bash/bash-original.svg', category: 'tools' },
     { name: 'React', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg', category: 'frontend' },
     { name: 'Node.js', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg', category: 'backend' },
-    { name: 'PostgreSQL', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/postgresql/postgresql-original.svg', category: 'database' },
-    { name: 'MongoDB', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/mongodb/mongodb-original.svg', category: 'database' },
-    { name: 'TensorFlow', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg', category: 'ai' },
-    { name: 'Docker', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/docker/docker-original.svg', category: 'devops' },
-    { name: 'AWS', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/amazonwebservices/amazonwebservices-original.svg', category: 'cloud' },
-    { name: 'Git', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg', category: 'tools' },
     { name: 'Linux', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/linux/linux-original.svg', category: 'os' },
-    { name: 'FastAPI', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg', category: 'backend' }
+    { name: 'Oracle', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/oracle/oracle-original.svg', category: 'database' },
+    { name: 'Excel', logo: 'https://upload.wikimedia.org/wikipedia/commons/3/34/Microsoft_Office_Excel_%282019%E2%80%93present%29.svg', category: 'tools' },
+    { name: 'Machine Learning', logo: 'https://upload.wikimedia.org/wikipedia/commons/0/05/Scikit_learn_logo_small.svg', category: 'ai' },
+    { name: 'TensorFlow', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tensorflow/tensorflow-original.svg', category: 'ai' },
+    { name: 'Git', logo: 'https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg', category: 'tools' }
   ];
 
   const experiments = [
     {
       id: 1,
-      title: 'Sistema de Análisis de Sentimientos',
-      description: 'Modelo de NLP para análisis de sentimientos en tiempo real usando transformers y FastAPI',
-      category: 'ai',
-      status: 'Activo',
-      tech: ['Python', 'Transformers', 'FastAPI', 'React'],
-      visual: 'https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=800',
+      title: 'Análisis y Mapeo Geoestadístico Bancario',
+      description: 'Mapa interactivo de sucursales de los principales bancos en la Ciudad de México y análisis comparativo entre instituciones financieras',
+      category: 'datascience',
+      status: 'Completado',
+      tech: ['Python', 'Mapping', 'Folium', 'APIs', 'Geostatistics'],
+      visual: 'https://images.pexels.com/photos/590016/pexels-photo-590016.jpeg?auto=compress&cs=tinysrgb&w=800',
       github: '#',
-      demo: '#'
+      demo: '/CDMX-Multibanco-Map.html'
     },
     {
       id: 2,
-      title: 'Dashboard de Visualización de Datos',
-      description: 'Plataforma interactiva para visualización de datasets complejos con Streamlit y Plotly',
-      category: 'datascience',
-      status: 'Completado',
-      tech: ['Python', 'Streamlit', 'Plotly', 'Pandas'],
-      visual: 'https://images.pexels.com/photos/2582937/pexels-photo-2582937.jpeg?auto=compress&cs=tinysrgb&w=800',
+      title: 'Análisis de Opinión y Extracción de Puntos de Dolor',
+      description: 'Sistema que genera insights relevantes sobre la opinión de los usuarios respecto a sucursales y cajeros automáticos en la Ciudad de México',
+      category: 'ai',
+      status: 'Activo',
+      tech: ['Python', 'NLP', 'Sentiment Analysis', 'Streamlit', 'Data Mining'],
+      visual: 'https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=800',
       github: '#',
-      demo: '#'
+      demo: 'https://bankdata.streamlit.app/'
     },
     {
       id: 3,
-      title: 'Automatización de Procesos con LLMs',
-      description: 'Sistema de automatización que utiliza modelos de lenguaje para procesar documentos',
+      title: 'Servicio SAAS con Inteligencia Artificial para Administración de Casos Jurídicos',
+      description: 'Servicio SAAS de software administrativo para despachos jurídicos, que permite redacción y análisis de documentos legales a través de asistencia con IA',
       category: 'ai',
-      status: 'En desarrollo',
-      tech: ['Python', 'OpenAI API', 'LangChain', 'PostgreSQL'],
-      visual: 'https://images.pexels.com/photos/1181263/pexels-photo-1181263.jpeg?auto=compress&cs=tinysrgb&w=800',
+      status: 'Activo',
+      tech: ['React', 'Node.js', 'OpenAI API', 'LegalTech', 'SAAS'],
+      visual: 'https://images.pexels.com/photos/5668772/pexels-photo-5668772.jpeg?auto=compress&cs=tinysrgb&w=800',
       github: '#',
-      demo: '#'
+      demo: 'https://www.orangepro.app'
     },
     {
       id: 4,
-      title: 'Herramienta de Pentesting Web',
-      description: 'Suite de herramientas para auditorías de seguridad web con interfaz moderna',
-      category: 'security',
-      status: 'Prototipo',
-      tech: ['Python', 'Flask', 'SQLite', 'JavaScript'],
-      visual: 'https://images.pexels.com/photos/60504/security-protection-anti-virus-software-60504.jpeg?auto=compress&cs=tinysrgb&w=800',
+      title: 'Menú Digital Interactivo',
+      description: 'Menú interactivo para restaurante gourmet, facilita la lectura de menús a través de filtros sencillos, mejorando la experiencia del cliente',
+      category: 'web',
+      status: 'Completado',
+      tech: ['React', 'JavaScript', 'UI/UX', 'Restaurant Tech'],
+      visual: 'https://images.pexels.com/photos/1581384/pexels-photo-1581384.jpeg?auto=compress&cs=tinysrgb&w=800',
       github: '#',
-      demo: '#'
+      demo: 'https://elchipil.digitalorange.com.mx'
+    },
+    {
+      id: 5,
+      title: 'Servicio de Creación de Páginas Web y Herramientas Corporativas',
+      description: 'Página web empresarial de servicio SAAS que ofrece servicios de desarrollo web, hosting, aplicaciones hechas a medida y soluciones corporativas',
+      category: 'web',
+      status: 'Activo',
+      tech: ['React', 'Node.js', 'SAAS', 'Web Development', 'Hosting'],
+      visual: 'https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg?auto=compress&cs=tinysrgb&w=800',
+      github: '#',
+      demo: 'https://digitalorange.com.mx'
     }
   ];
 
@@ -688,7 +733,7 @@ function App() {
                 { id: 'craft', label: t.nav.craft },
                 { id: 'journey', label: t.nav.journey },
                 { id: 'manifesto', label: t.nav.manifesto },
-                { id: 'laboratory', label: t.nav.laboratory },
+                { id: 'projects', label: t.nav.projects },
                 { id: 'blog', label: t.nav.blog },
                 { id: 'contact', label: t.nav.contact }
               ].map((item) => (
@@ -822,7 +867,7 @@ function App() {
                   { id: 'craft', label: t.nav.craft, icon: Code2 },
                   { id: 'journey', label: t.nav.journey, icon: Briefcase },
                   { id: 'manifesto', label: t.nav.manifesto, icon: BookOpen },
-                  { id: 'laboratory', label: t.nav.laboratory, icon: Terminal },
+                  { id: 'projects', label: t.nav.projects, icon: Terminal },
                   { id: 'blog', label: t.nav.blog, icon: BookOpen },
                   { id: 'contact', label: t.nav.contact, icon: Mail }
                 ].map((item) => (
@@ -937,12 +982,12 @@ function App() {
 
             <div className="flex flex-col sm:flex-row gap-6 justify-center mt-12">
               <button
-                onClick={() => scrollToSection('laboratory')}
+                onClick={() => scrollToSection('projects')}
                 className={`group relative px-8 py-4 bg-white/5 backdrop-blur-xl border border-white/10 rounded-full font-light transition-all duration-500 overflow-hidden ${isDarkMode ? 'text-cyan-400 hover:text-black' : 'text-cyan-600 hover:text-white'}`}
               >
                 <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-purple-500 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500 rounded-full"></div>
                 <span className="relative flex items-center space-x-2">
-                  <span>{t.hero.laboratory}</span>
+                  <span>{t.hero.projects}</span>
                   <ArrowUpRight size={16} className="group-hover:rotate-45 transition-transform duration-300" />
                 </span>
               </button>
@@ -973,26 +1018,12 @@ function App() {
             <p className={`text-xl font-light ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>{t.about.subtitle}</p>
           </div>
 
-          {/* Layout móvil: foto arriba, descripción a la derecha, estadísticas abajo */}
-          <div className="lg:grid lg:grid-cols-2 lg:gap-16 lg:items-start">
-            
-            {/* Foto y descripción - Layout móvil */}
-            <div className="lg:hidden space-y-6">
-              {/* Foto en móvil */}
-              <div className="flex justify-center">
-                <div className="group relative overflow-hidden bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl transition-all duration-500 hover:border-cyan-400/30 w-48 h-64">
-                  <img 
-                    src={profilePhoto} 
-                    alt="Saúl Hinojosa - Ingeniero de Software"
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
-                  <div className={`absolute inset-0 ${isDarkMode ? 'bg-gradient-to-t from-black/20 via-transparent to-transparent' : 'bg-gradient-to-t from-white/10 via-transparent to-transparent'}`}></div>
-                  <div className="absolute inset-0 bg-gradient-to-t from-cyan-400/10 via-transparent to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                </div>
-              </div>
-
-              {/* Descripción en móvil */}
-              <div className="space-y-6">
+          {/* Layout: texto e imagen lado a lado, estadísticas debajo */}
+          <div className="space-y-12">
+            {/* Contenido principal: descripción e imagen lado a lado */}
+            <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+              {/* Descripción y highlights */}
+              <div className="space-y-8">
                 <p className={`text-lg leading-relaxed font-light ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
                   {t.about.description}
                 </p>
@@ -1007,111 +1038,70 @@ function App() {
                 </div>
               </div>
 
-              {/* Estadísticas en móvil */}
-              <div className="relative mt-8">
-                <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-6">
-                  <div className="grid grid-cols-2 gap-6 text-center">
-                    <div>
-                      <div className="text-2xl font-light text-cyan-400 mb-2">5+</div>
-                      <div className={`text-xs font-light ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Años de Experiencia</div>
-                    </div>
-                    <div>
-                      <div className="text-2xl font-light text-purple-400 mb-2">50+</div>
-                      <div className={`text-xs font-light ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Proyectos Completados</div>
-                    </div>
-                    <div>
-                      <div className="text-2xl font-light text-pink-400 mb-2">15+</div>
-                      <div className={`text-xs font-light ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Tecnologías</div>
-                    </div>
-                    <div>
-                      <div className="text-2xl font-light text-orange-400 mb-2">3+</div>
-                      <div className={`text-xs font-light ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Equipos Liderados</div>
+              {/* Imagen profesional */}
+              <div className="relative flex justify-center lg:justify-end">
+                <div className="group relative overflow-hidden bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl transition-all duration-500 hover:border-cyan-400/30 w-64 lg:w-full max-w-sm">
+                  {/* Contenedor de imagen profesional */}
+                  <div className="relative h-80 lg:h-96 overflow-hidden">
+                    <img 
+                      src={profilePhoto} 
+                      alt="Saúl Hinojosa - Ingeniero de Software"
+                      className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                    />
+                    {/* Overlay sutil para integración con el diseño */}
+                    <div className={`absolute inset-0 ${isDarkMode ? 'bg-gradient-to-t from-black/20 via-transparent to-transparent' : 'bg-gradient-to-t from-white/10 via-transparent to-transparent'}`}></div>
+                    {/* Overlay hover para efectos interactivos */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-cyan-400/10 via-transparent to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  </div>
+
+                  {/* Efectos decorativos */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                  
+                  {/* Líneas decorativas */}
+                  <div className="absolute top-6 left-6 w-8 h-8 border-l-2 border-t-2 border-cyan-400/30 rounded-tl-lg opacity-0 group-hover:opacity-100 transition-all duration-500 transform -translate-x-2 -translate-y-2 group-hover:translate-x-0 group-hover:translate-y-0"></div>
+                  <div className="absolute bottom-6 right-6 w-8 h-8 border-r-2 border-b-2 border-purple-400/30 rounded-br-lg opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-x-2 translate-y-2 group-hover:translate-x-0 group-hover:translate-y-0"></div>
+
+                  {/* Glow effect */}
+                  <div className="absolute -inset-1 bg-gradient-to-br from-cyan-400/10 via-purple-500/10 to-pink-500/10 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl"></div>
+                  
+                  {/* Badge flotante */}
+                  <div className={`absolute -top-2 -right-2 px-5 py-3 rounded-full text-xs font-light border backdrop-blur-xl ${
+                    isDarkMode 
+                      ? 'bg-black/80 border-gray-700/50 text-gray-300' 
+                      : 'bg-white/80 border-gray-300/50 text-gray-700'
+                  }`}>
+                    <div className="flex items-center space-x-2">
+                      <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                      <span>Disponible</span>
                     </div>
                   </div>
                 </div>
-                <div className="absolute -inset-1 bg-gradient-to-br from-cyan-400/20 via-purple-500/20 to-pink-500/20 blur-xl opacity-30 rounded-3xl"></div>
               </div>
             </div>
 
-            {/* Layout desktop - contenido izquierdo */}
-            <div className="hidden lg:block space-y-8">
-              <p className={`text-lg leading-relaxed font-light ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
-                {t.about.description}
-              </p>
-              
-              <div className="space-y-4">
-                {t.about.highlights.map((highlight, index) => (
-                  <div key={index} className="flex items-center space-x-4">
-                    <div className="w-2 h-2 bg-gradient-to-r from-cyan-400 to-purple-500 rounded-full"></div>
-                    <span className={`font-light ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>{highlight}</span>
+            {/* Estadísticas debajo de todo */}
+            <div className="relative">
+              <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8">
+                <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
+                  <div>
+                    <div className="text-3xl font-light text-cyan-400 mb-2">3+</div>
+                    <div className={`text-sm font-light ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Años de Experiencia</div>
                   </div>
-                ))}
-              </div>
-
-              {/* Estadísticas desktop */}
-              <div className="relative mt-12">
-                <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8">
-                  <div className="grid grid-cols-2 gap-8 text-center">
-                    <div>
-                      <div className="text-3xl font-light text-cyan-400 mb-2">5+</div>
-                      <div className={`text-sm font-light ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Años de Experiencia</div>
-                    </div>
-                    <div>
-                      <div className="text-3xl font-light text-purple-400 mb-2">50+</div>
-                      <div className={`text-sm font-light ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Proyectos Completados</div>
-                    </div>
-                    <div>
-                      <div className="text-3xl font-light text-pink-400 mb-2">15+</div>
-                      <div className={`text-sm font-light ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Tecnologías</div>
-                    </div>
-                    <div>
-                      <div className="text-3xl font-light text-orange-400 mb-2">3+</div>
-                      <div className={`text-sm font-light ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Equipos Liderados</div>
-                    </div>
+                  <div>
+                    <div className="text-3xl font-light text-purple-400 mb-2">20+</div>
+                    <div className={`text-sm font-light ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Proyectos Completados</div>
+                  </div>
+                  <div>
+                    <div className="text-3xl font-light text-pink-400 mb-2">15+</div>
+                    <div className={`text-sm font-light ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Tecnologías</div>
+                  </div>
+                  <div>
+                    <div className="text-3xl font-light text-orange-400 mb-2">3+</div>
+                    <div className={`text-sm font-light ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Equipos Liderados</div>
                   </div>
                 </div>
-                <div className="absolute -inset-1 bg-gradient-to-br from-cyan-400/20 via-purple-500/20 to-pink-500/20 blur-xl opacity-30 rounded-3xl"></div>
               </div>
-            </div>
-
-            {/* Imagen profesional desktop */}
-            <div className="hidden lg:block relative flex items-start">
-              <div className="group relative overflow-hidden bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl transition-all duration-500 hover:border-cyan-400/30 w-full">
-                {/* Contenedor de imagen profesional */}
-                <div className="relative h-[460px] overflow-hidden">
-                  <img 
-                    src={profilePhoto} 
-                    alt="Saúl Hinojosa - Ingeniero de Software"
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
-                  />
-                  {/* Overlay sutil para integración con el diseño */}
-                  <div className={`absolute inset-0 ${isDarkMode ? 'bg-gradient-to-t from-black/20 via-transparent to-transparent' : 'bg-gradient-to-t from-white/10 via-transparent to-transparent'}`}></div>
-                  {/* Overlay hover para efectos interactivos */}
-                  <div className="absolute inset-0 bg-gradient-to-t from-cyan-400/10 via-transparent to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                </div>
-
-                {/* Efectos decorativos */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/20 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
-                
-                {/* Líneas decorativas */}
-                <div className="absolute top-6 left-6 w-8 h-8 border-l-2 border-t-2 border-cyan-400/30 rounded-tl-lg opacity-0 group-hover:opacity-100 transition-all duration-500 transform -translate-x-2 -translate-y-2 group-hover:translate-x-0 group-hover:translate-y-0"></div>
-                <div className="absolute bottom-6 right-6 w-8 h-8 border-r-2 border-b-2 border-purple-400/30 rounded-br-lg opacity-0 group-hover:opacity-100 transition-all duration-500 transform translate-x-2 translate-y-2 group-hover:translate-x-0 group-hover:translate-y-0"></div>
-              </div>
-
-              {/* Glow effect */}
-              <div className="absolute -inset-1 bg-gradient-to-br from-cyan-400/10 via-purple-500/10 to-pink-500/10 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl"></div>
-              
-              {/* Badge flotante */}
-              <div className={`absolute -top-3 -right-3 px-4 py-2 rounded-full text-xs font-light border backdrop-blur-xl ${
-                isDarkMode 
-                  ? 'bg-black/80 border-gray-700/50 text-gray-300' 
-                  : 'bg-white/80 border-gray-300/50 text-gray-700'
-              }`}>
-                <div className="flex items-center space-x-2">
-                  <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
-                  <span>Disponible</span>
-                </div>
-              </div>
+              <div className="absolute -inset-1 bg-gradient-to-br from-cyan-400/20 via-purple-500/20 to-pink-500/20 blur-xl opacity-30 rounded-3xl"></div>
             </div>
           </div>
         </div>
@@ -1184,6 +1174,19 @@ function App() {
                           : 'bg-purple-400 border-purple-400'
                       } shadow-lg`}></div>
                     </div>
+
+                    {/* Logo móvil - arriba de la tarjeta */}
+                    {experience.logo && (
+                      <div className="mb-4 flex justify-center">
+                        <div className={`${isDarkMode ? 'bg-white/90' : 'bg-white'} backdrop-blur-xl border border-white/20 rounded-2xl p-4 sm:p-5 md:p-6 w-32 h-32 sm:w-36 sm:h-36 md:w-40 md:h-40 flex items-center justify-center shadow-lg`}>
+                          <img 
+                            src={experience.logo} 
+                            alt={`${experience.company} logo`}
+                            className="max-w-full max-h-full object-contain"
+                          />
+                        </div>
+                      </div>
+                    )}
 
                     {/* Content móvil */}
                     <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
@@ -1294,7 +1297,7 @@ function App() {
                         
                         <div className="space-y-3 mb-6">
                           {experience.achievements.map((achievement, achIndex) => (
-                            <div key={achIndex} className={`flex items-start space-x-3 ${index % 2 === 0 ? 'flex-row-reverse space-x-reverse' : ''}`}>
+                            <div key={achIndex} className="flex items-start space-x-3">
                               <Star size={14} className="text-yellow-400 mt-1 flex-shrink-0" />
                               <span className={`text-sm font-light ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
                                 {achievement}
@@ -1322,8 +1325,18 @@ function App() {
                       } shadow-lg`}></div>
                     </div>
 
-                    {/* Empty Space desktop */}
-                    <div className="w-5/12"></div>
+                    {/* Logo desktop - lado opuesto */}
+                    <div className="w-5/12 flex items-center justify-center">
+                      {experience.logo && (
+                        <div className={`${isDarkMode ? 'bg-white/90' : 'bg-white'} backdrop-blur-xl border border-white/20 rounded-3xl p-6 lg:p-8 xl:p-10 w-40 h-40 lg:w-48 lg:h-48 xl:w-56 xl:h-56 flex items-center justify-center shadow-lg`}>
+                          <img 
+                            src={experience.logo} 
+                            alt={`${experience.company} logo`}
+                            className="max-w-full max-h-full object-contain"
+                          />
+                        </div>
+                      )}
+                    </div>
                   </div>
                 ))}
               </div>
@@ -1343,7 +1356,7 @@ function App() {
             </h2>
           </div>
 
-          <div className="grid lg:grid-cols-2 gap-20 items-start">
+          <div className="max-w-4xl mx-auto">
             <div className="space-y-16">
               <div className="relative">
                 <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8">
@@ -1375,39 +1388,24 @@ function App() {
                 </div>
               </div>
             </div>
-
-            <div className="relative">
-              <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8">
-                <h3 className={`text-2xl font-light mb-8 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>{t.manifesto.domains}</h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {t.manifesto.domainsList.map((domain, index) => (
-                    <div key={index} className={`group flex items-center space-x-4 p-4 hover:${isDarkMode ? 'bg-gray-800/30' : 'bg-gray-100/30'} transition-colors duration-300 rounded-2xl`}>
-                      <div className="w-2 h-2 bg-gradient-to-r from-cyan-400 to-purple-500 rounded-full group-hover:scale-150 transition-transform duration-300"></div>
-                      <span className={`font-light group-hover:${isDarkMode ? 'text-white' : 'text-gray-900'} transition-colors duration-300 ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>{domain}</span>
-                    </div>
-                  ))}
-                </div>
-              </div>
-              <div className="absolute -inset-1 bg-gradient-to-br from-cyan-400/20 via-purple-500/20 to-pink-500/20 blur-xl opacity-30 rounded-3xl"></div>
-            </div>
           </div>
         </div>
       </section>
 
-      {/* Laboratory Section */}
-      <section id="laboratory" className="py-20 relative z-10">
+      {/* Projects Section */}
+      <section id="projects" className="py-20 relative z-10">
         <div className="max-w-7xl mx-auto px-6 lg:px-8">
           <div className="text-center mb-20">
             <h2 className="text-5xl md:text-6xl font-thin mb-8">
               <span className="bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent">
-                {t.laboratory.title}
+                {t.projects.title}
               </span>
             </h2>
-            <p className={`text-xl font-light mb-12 ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>{t.laboratory.subtitle}</p>
+            <p className={`text-xl font-light mb-12 ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>{t.projects.subtitle}</p>
 
             {/* Experiment Filters */}
             <div className="flex flex-wrap justify-center gap-4 mb-16">
-              {Object.entries(t.laboratory.categories).map(([key, label]) => (
+              {Object.entries(t.projects.categories).map(([key, label]) => (
                 <button
                   key={key}
                   onClick={() => setLabFilter(key)}
@@ -1425,58 +1423,63 @@ function App() {
 
           <div className="grid md:grid-cols-2 gap-12">
             {filteredExperiments.map((experiment) => (
-              <div key={experiment.id} className="group relative">
-                <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl overflow-hidden transition-all duration-500 hover:border-cyan-400/30">
-                  <div className="relative overflow-hidden h-64">
-                    <img 
-                      src={experiment.visual} 
-                      alt={experiment.title}
-                      className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
-                    />
-                    <div className={`absolute inset-0 ${isDarkMode ? 'bg-gradient-to-t from-black via-transparent to-transparent' : 'bg-gradient-to-t from-white via-transparent to-transparent'}`}></div>
-                    <div className="absolute top-4 left-4 flex items-center space-x-2">
-                      <div className={`w-2 h-2 rounded-full ${
-                        experiment.status === 'Activo' ? 'bg-green-400' :
-                        experiment.status === 'Completado' ? 'bg-blue-400' :
-                        experiment.status === 'En desarrollo' ? 'bg-yellow-400' : 'bg-purple-400'
-                      }`}></div>
-                      <span className={`text-xs font-light ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>{experiment.status}</span>
+              <div key={experiment.id} className="group relative h-full">
+                <a
+                  href={experiment.demo}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="block cursor-pointer h-full"
+                >
+                  <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl overflow-hidden transition-all duration-500 hover:border-cyan-400/30 h-full flex flex-col">
+                    <div className="relative overflow-hidden h-64 flex-shrink-0">
+                      <img 
+                        src={experiment.visual} 
+                        alt={experiment.title}
+                        className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700"
+                      />
+                      <div className={`absolute inset-0 ${isDarkMode ? 'bg-gradient-to-t from-black via-transparent to-transparent' : 'bg-gradient-to-t from-white via-transparent to-transparent'}`}></div>
+                      <div className="absolute top-4 left-4 flex items-center space-x-2">
+                        <div className={`w-2 h-2 rounded-full ${
+                          experiment.status === 'Activo' ? 'bg-green-400' :
+                          experiment.status === 'Completado' ? 'bg-blue-400' :
+                          experiment.status === 'En desarrollo' ? 'bg-yellow-400' : 'bg-purple-400'
+                        }`}></div>
+                        <span className={`text-xs font-light ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>{experiment.status}</span>
+                      </div>
+                      
+                      {/* Hover overlay con icono de enlace externo */}
+                      <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
+                                              <div className="flex flex-col items-center space-y-2 text-white">
+                        <ExternalLink size={32} className="animate-pulse" />
+                        <span className="text-sm font-light">{t.projects.viewProject}</span>
+                      </div>
+                      </div>
                     </div>
-                  </div>
-                  
-                  <div className="p-8">
-                    <h3 className={`text-xl font-light mb-4 group-hover:text-cyan-400 transition-colors duration-300 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
-                      {experiment.title}
-                    </h3>
-                    <p className={`mb-6 leading-relaxed font-light ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>
-                      {experiment.description}
-                    </p>
-                    <div className="flex flex-wrap gap-3 mb-6">
-                      {experiment.tech.map((tech, index) => (
-                        <span key={index} className={`px-4 py-2 text-sm font-light border rounded-full ${isDarkMode ? 'bg-gray-800/50 text-gray-300 border-gray-700' : 'bg-gray-100/50 text-gray-700 border-gray-300'}`}>
-                          {tech}
-                        </span>
-                      ))}
-                    </div>
-                    <div className="flex space-x-6">
-                      <a 
-                        href={experiment.github}
-                        className={`flex items-center space-x-2 transition-colors duration-300 ${isDarkMode ? 'text-gray-400 hover:text-cyan-400' : 'text-gray-600 hover:text-cyan-600'}`}
-                      >
-                        <Github size={16} />
-                        <span className="text-sm font-light">Código</span>
-                      </a>
-                      <a 
-                        href={experiment.demo}
-                        className={`flex items-center space-x-2 transition-colors duration-300 ${isDarkMode ? 'text-gray-400 hover:text-purple-400' : 'text-gray-600 hover:text-purple-600'}`}
-                      >
+                    
+                    <div className="p-8 flex flex-col flex-1">
+                      <h3 className={`text-xl font-light mb-4 group-hover:text-cyan-400 transition-colors duration-300 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
+                        {experiment.title}
+                      </h3>
+                      <p className={`mb-6 leading-relaxed font-light flex-1 ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>
+                        {experiment.description}
+                      </p>
+                      <div className="flex flex-wrap gap-3 mb-6">
+                        {experiment.tech.map((tech, index) => (
+                          <span key={index} className={`px-4 py-2 text-sm font-light border rounded-full ${isDarkMode ? 'bg-gray-800/50 text-gray-300 border-gray-700' : 'bg-gray-100/50 text-gray-700 border-gray-300'}`}>
+                            {tech}
+                          </span>
+                        ))}
+                      </div>
+                      
+                      {/* Indicador visual de que es clickeable */}
+                      <div className={`flex items-center space-x-2 text-sm font-light mt-auto ${isDarkMode ? 'text-gray-400 group-hover:text-cyan-400' : 'text-gray-600 group-hover:text-cyan-600'} transition-colors duration-300`}>
                         <ExternalLink size={16} />
-                        <span className="text-sm font-light">{t.laboratory.viewExperiment}</span>
-                      </a>
+                        <span>{t.projects.clickToVisit}</span>
+                      </div>
                     </div>
                   </div>
-                </div>
-                <div className="absolute -inset-1 bg-gradient-to-br from-cyan-400/10 to-purple-500/10 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl"></div>
+                </a>
+                <div className="absolute -inset-1 bg-gradient-to-br from-cyan-400/10 to-purple-500/10 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl pointer-events-none"></div>
               </div>
             ))}
           </div>
