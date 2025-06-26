@@ -1,45 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { 
-  Code2, 
-  Brain, 
-  Database, 
-  Globe, 
-  Shield, 
-  Cpu, 
-  Menu, 
-  X, 
-  ExternalLink, 
-  Github, 
-  Linkedin, 
-  Mail,
-  Calendar,
-  User,
-  Briefcase,
-  BookOpen,
-  ChevronRight,
-  Languages,
-  Star,
-  Terminal,
-  Zap,
-  Target,
-  ArrowUpRight,
-  Play,
-  Pause,
-  Volume2,
-  Sun,
-  Moon,
-  Server,
-  Code,
-  Layers,
-  Network,
-  Lock,
-  Smartphone,
-  MapPin,
-  GraduationCap
+  Code2, Brain, Database, Globe,Shield, Cpu, Menu, X, ExternalLink, Github, Linkedin, Mail,Calendar,User,Briefcase,BookOpen,ChevronRight,Languages,Star,Terminal,Zap,Target,ArrowUpRight,Play,Pause,Volume2,Sun,Moon,Server,Code,Layers,Network,Lock,Smartphone,MapPin,GraduationCap
 } from 'lucide-react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { ScrollToPlugin } from 'gsap/ScrollToPlugin';
+import profilePhoto from './profile-photo.jpg';
 
 gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 
@@ -358,127 +324,241 @@ function App() {
   const [currentLang, setCurrentLang] = useState<'es' | 'en'>('es');
   const [isDarkMode, setIsDarkMode] = useState(true);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isMenuAnimating, setIsMenuAnimating] = useState(false);
   const [activeSection, setActiveSection] = useState('hero');
   const [labFilter, setLabFilter] = useState('all');
   const [blogFilter, setBlogFilter] = useState('all');
   const timelineRef = useRef<HTMLDivElement>(null);
-  const progressLineRef = useRef<HTMLDivElement>(null);
 
   const t = translations[currentLang];
 
   // Timeline animation
   useEffect(() => {
-    if (!timelineRef.current || !progressLineRef.current) return;
+    if (!timelineRef.current) return;
 
     const timeline = timelineRef.current;
-    const progressLine = progressLineRef.current;
-    const timelineItems = timeline.querySelectorAll('.timeline-item');
+    
+    // Separate animations for mobile and desktop
+    const desktopTimeline = timeline.querySelector('.desktop-timeline');
+    const mobileTimeline = timeline.querySelector('.mobile-timeline');
+    
+    // Desktop animations
+    if (desktopTimeline) {
+      const progressLine = desktopTimeline.querySelector('.progress-line');
+      const timelineItems = desktopTimeline.querySelectorAll('.timeline-item');
 
-    // Set initial state
-    gsap.set(progressLine, { scaleY: 0, transformOrigin: 'top' });
-    gsap.set(timelineItems, { opacity: 0, x: (i) => i % 2 === 0 ? -100 : 100 });
+      if (progressLine && timelineItems.length > 0) {
+        // Set initial state for desktop
+        gsap.set(progressLine, { scaleY: 0, transformOrigin: 'top' });
+        gsap.set(timelineItems, { opacity: 0, x: (i) => i % 2 === 0 ? -100 : 100 });
 
-    // Create timeline animation
-    const tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: timeline,
-        start: 'top 80%',
-        end: 'bottom 20%',
-        scrub: 1,
-        onUpdate: (self) => {
-          // Animate progress line based on scroll progress
-          gsap.to(progressLine, {
-            scaleY: self.progress,
-            duration: 0.1,
-            ease: 'none'
+        // Create timeline animation for desktop
+        ScrollTrigger.create({
+          trigger: desktopTimeline,
+          start: 'top 80%',
+          end: 'bottom 20%',
+          scrub: 1,
+          onUpdate: (self) => {
+            // Animate progress line based on scroll progress
+            gsap.to(progressLine, {
+              scaleY: self.progress,
+              duration: 0.1,
+              ease: 'none'
+            });
+          }
+        });
+
+        // Animate timeline items for desktop
+        timelineItems.forEach((item, index) => {
+          ScrollTrigger.create({
+            trigger: item,
+            start: 'top 85%',
+            end: 'bottom -10%',
+            onEnter: () => {
+              gsap.to(item, {
+                opacity: 1,
+                x: 0,
+                duration: 0.8,
+                ease: 'power2.out'
+              });
+            },
+            onLeave: () => {
+              gsap.to(item, {
+                opacity: 0.6,
+                duration: 0.5,
+                ease: 'power2.out'
+              });
+            },
+            onEnterBack: () => {
+              gsap.to(item, {
+                opacity: 1,
+                duration: 0.5,
+                ease: 'power2.out'
+              });
+            }
           });
-        }
+        });
       }
-    });
+    }
 
-    // Animate timeline items
-    timelineItems.forEach((item, index) => {
-      ScrollTrigger.create({
-        trigger: item,
-        start: 'top 85%',
-        end: 'bottom 85%',
-        onEnter: () => {
-          gsap.to(item, {
-            opacity: 1,
-            x: 0,
-            duration: 0.8,
-            ease: 'power2.out'
+    // Mobile animations
+    if (mobileTimeline) {
+      const progressLine = mobileTimeline.querySelector('.progress-line');
+      const timelineItems = mobileTimeline.querySelectorAll('.timeline-item');
+
+      if (progressLine && timelineItems.length > 0) {
+        // Set initial state for mobile
+        gsap.set(progressLine, { scaleY: 0, transformOrigin: 'top' });
+        gsap.set(timelineItems, { opacity: 0, y: 50 }); // Mobile uses Y animation
+
+        // Create timeline animation for mobile
+        ScrollTrigger.create({
+          trigger: mobileTimeline,
+          start: 'top 80%',
+          end: 'bottom 20%',
+          scrub: 1,
+          onUpdate: (self) => {
+            // Animate progress line based on scroll progress
+            gsap.to(progressLine, {
+              scaleY: self.progress,
+              duration: 0.1,
+              ease: 'none'
+            });
+          }
+        });
+
+        // Animate timeline items for mobile
+        timelineItems.forEach((item, index) => {
+          ScrollTrigger.create({
+            trigger: item,
+            start: 'top 90%',
+            end: 'bottom -10%',
+            onEnter: () => {
+              gsap.to(item, {
+                opacity: 1,
+                y: 0,
+                duration: 0.6,
+                ease: 'power2.out'
+              });
+            },
+            onLeave: () => {
+              gsap.to(item, {
+                opacity: 0.6,
+                duration: 0.4,
+                ease: 'power2.out'
+              });
+            },
+            onEnterBack: () => {
+              gsap.to(item, {
+                opacity: 1,
+                duration: 0.4,
+                ease: 'power2.out'
+              });
+            }
           });
-        },
-        onLeave: () => {
-          gsap.to(item, {
-            opacity: 0.3,
-            duration: 0.3
-          });
-        },
-        onEnterBack: () => {
-          gsap.to(item, {
-            opacity: 1,
-            duration: 0.3
-          });
-        }
-      });
-    });
+        });
+      }
+    }
 
     return () => {
       ScrollTrigger.getAll().forEach(trigger => trigger.kill());
     };
   }, []);
 
-  // Scroll tracking
+  // Scroll tracking y control del menú móvil
   useEffect(() => {
     const handleScroll = () => {
       const sections = ['hero', 'about', 'craft', 'journey', 'manifesto', 'laboratory', 'blog', 'contact'];
-      const scrollPosition = window.scrollY + 100;
+      const scrollPosition = window.scrollY + 150; // Aumentamos offset para mejor detección
 
+      // Buscar la sección actual de forma más precisa
+      let currentSection = 'hero'; // Default
+      
       for (const section of sections) {
         const element = document.getElementById(section);
         if (element) {
           const { offsetTop, offsetHeight } = element;
-          if (scrollPosition >= offsetTop && scrollPosition < offsetTop + offsetHeight) {
-            setActiveSection(section);
+          const sectionTop = offsetTop - 80; // Ajuste para la navbar
+          const sectionBottom = offsetTop + offsetHeight - 80;
+          
+          if (scrollPosition >= sectionTop && scrollPosition < sectionBottom) {
+            currentSection = section;
             break;
           }
         }
       }
+      
+      setActiveSection(currentSection);
     };
 
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+    // Cerrar menú móvil con tecla Escape
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isMenuOpen) {
+        closeMenu();
+      }
+    };
 
+    // Prevenir scroll del body cuando el menú esté abierto o animándose
+    if (isMenuOpen || isMenuAnimating) {
+      document.body.style.overflow = 'hidden';
+    } else {
+      document.body.style.overflow = 'unset';
+    }
+
+    // Throttle del scroll para mejor rendimiento
+    let scrollTimeout: ReturnType<typeof setTimeout> | null = null;
+    const throttledHandleScroll = () => {
+      if (scrollTimeout) return;
+      scrollTimeout = setTimeout(() => {
+        handleScroll();
+        scrollTimeout = null;
+      }, 50); // Throttle de 50ms
+    };
+
+    window.addEventListener('scroll', throttledHandleScroll);
+    document.addEventListener('keydown', handleKeyDown);
+    
+    // Ejecutar una vez al cargar
+    handleScroll();
+    
+    return () => {
+      window.removeEventListener('scroll', throttledHandleScroll);
+      document.removeEventListener('keydown', handleKeyDown);
+      document.body.style.overflow = 'unset';
+      if (scrollTimeout) {
+        clearTimeout(scrollTimeout);
+      }
+    };
+      }, [isMenuOpen, isMenuAnimating]);
+
+  // Función para abrir menú
+  const openMenu = () => {
+    setIsMenuOpen(true);
+  };
+
+  // Función para cerrar menú con animación
+  const closeMenu = () => {
+    setIsMenuAnimating(true);
+    setTimeout(() => {
+      setIsMenuOpen(false);
+      setIsMenuAnimating(false);
+    }, 300); // Duración de la animación
+  };
+
+  // Función de scroll simplificada y confiable
   const scrollToSection = (sectionId: string) => {
+    // Cerrar el menú móvil con animación
+    closeMenu();
+    
     const element = document.getElementById(sectionId);
     if (element) {
       const navHeight = 80;
-      const elementPosition = element.offsetTop - navHeight;
       
-      // Cerrar el menú móvil primero
-      setIsMenuOpen(false);
-      
-      // Intentar usar GSAP primero
-      try {
-        gsap.to(window, {
-          duration: 1.2,
-          scrollTo: { y: elementPosition, autoKill: false },
-          ease: 'power2.inOut'
-        });
-      } catch (error) {
-        // Fallback a scroll nativo si GSAP falla
-        console.log('GSAP scroll failed, using native scroll');
-        window.scrollTo({
-          top: elementPosition,
-          behavior: 'smooth'
-        });
-      }
-    } else {
-      // Cerrar menú incluso si no se encuentra el elemento
-      setIsMenuOpen(false);
+      // Usar scroll nativo más simple y confiable
+      window.scrollTo({
+        top: element.offsetTop - navHeight,
+        behavior: 'smooth'
+      });
     }
   };
 
@@ -589,7 +669,7 @@ function App() {
   return (
     <div className={`${themeClasses} min-h-screen relative overflow-x-hidden transition-colors duration-500`}>
       {/* Navigation */}
-      <nav className={`fixed top-0 w-full ${isDarkMode ? 'bg-black/80' : 'bg-white/80'} backdrop-blur-xl border-b ${isDarkMode ? 'border-gray-800/50' : 'border-gray-200/50'} z-40 transition-colors duration-500`}>
+      <nav className={`fixed top-0 w-full ${isDarkMode ? 'bg-black/80' : 'bg-white/80'} backdrop-blur-xl border-b ${isDarkMode ? 'border-gray-800/50' : 'border-gray-200/50'} z-[45] transition-colors duration-500`}>
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-20">
             <div className="flex items-center">
@@ -658,44 +738,85 @@ function App() {
                 ))}
               </div>
 
+              {/* Botón del menú móvil - solo visible cuando el menú está cerrado */}
               <div className="lg:hidden">
-                <button
-                  onClick={() => setIsMenuOpen(!isMenuOpen)}
-                  className={`p-2 ${isDarkMode ? 'text-gray-400 hover:text-white' : 'text-gray-600 hover:text-gray-900'}`}
-                >
-                  {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
-                </button>
+                {!isMenuOpen && (
+                  <button
+                    onClick={openMenu}
+                    className={`relative p-3 rounded-xl transition-all duration-300 border ${
+                      isDarkMode 
+                        ? 'text-gray-300 hover:text-cyan-400 hover:bg-gray-800/50 border-gray-700/50 hover:border-cyan-400/30' 
+                        : 'text-gray-700 hover:text-cyan-600 hover:bg-gray-100/50 border-gray-300/50 hover:border-cyan-600/30'
+                    }`}
+                    aria-label="Abrir menú de navegación"
+                  >
+                    <div className="transition-transform duration-200">
+                      <Menu size={24} />
+                    </div>
+                  </button>
+                )}
               </div>
             </div>
           </div>
         </div>
 
+        {/* Overlay del menú móvil */}
+        {(isMenuOpen || isMenuAnimating) && (
+          <div 
+            className={`lg:hidden fixed inset-0 bg-black/60 z-[55] transition-opacity duration-300 ${
+              isMenuAnimating ? 'opacity-0' : 'opacity-100'
+            }`}
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+              if (!isMenuAnimating) {
+                closeMenu();
+              }
+            }}
+            style={{
+              touchAction: 'none'
+            }}
+          />
+        )}
+
         {/* Mobile Navigation - Sidebar */}
-        <div className={`lg:hidden fixed top-0 right-0 h-full w-80 max-w-[80vw] z-50 transform transition-transform duration-500 ease-in-out ${
-          isMenuOpen ? 'translate-x-0' : 'translate-x-full'
-        } ${isDarkMode ? 'bg-black/95' : 'bg-white/95'} backdrop-blur-xl border-l ${isDarkMode ? 'border-gray-800/50' : 'border-gray-200/50'}`}>
-          <div className="flex flex-col h-full">
-            {/* Header del menú lateral */}
-            <div className="flex items-center justify-between p-6 border-b border-gray-800/30">
-              <div className="relative">
-                <div className="w-10 h-10 bg-gradient-to-br from-cyan-400 via-purple-500 to-pink-500 rounded-lg flex items-center justify-center">
-                  <span className="text-black font-bold text-lg">SH</span>
+        {(isMenuOpen || isMenuAnimating) && (
+          <div 
+            className={`lg:hidden fixed top-0 right-0 h-screen w-80 max-w-[85vw] z-[60] ${
+              isDarkMode ? 'bg-black' : 'bg-white'
+            } border-l ${isDarkMode ? 'border-gray-700' : 'border-gray-300'} shadow-2xl transform transition-all duration-300 ease-in-out ${
+              isMenuAnimating ? 'translate-x-full opacity-75' : 'translate-x-0 opacity-100'
+            }`}
+            onClick={(e) => {
+              e.preventDefault();
+              e.stopPropagation();
+            }}
+          >
+            {/* Header del menú lateral - FIJO */}
+            <div className={`flex items-center justify-between p-4 border-b ${isDarkMode ? 'border-gray-700' : 'border-gray-300'} ${isDarkMode ? 'bg-black' : 'bg-white'}`}>
+              <div className="flex items-center space-x-3">
+                <div className="relative">
+                  <div className="w-8 h-8 bg-gradient-to-br from-cyan-400 via-purple-500 to-pink-500 rounded-lg flex items-center justify-center">
+                    <span className="text-black font-bold text-sm">SH</span>
+                  </div>
                 </div>
-                <div className="absolute -inset-1 bg-gradient-to-br from-cyan-400 via-purple-500 to-pink-500 rounded-lg blur opacity-30 animate-pulse"></div>
+                                  <span className={`font-semibold text-lg ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
+                    Navegación
+                  </span>
               </div>
               <button
-                onClick={() => setIsMenuOpen(false)}
+                onClick={closeMenu}
                 className={`p-2 rounded-full transition-colors duration-300 ${
                   isDarkMode ? 'text-gray-400 hover:text-white hover:bg-gray-800/50' : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100/50'
                 }`}
               >
-                <X size={24} />
+                <X size={20} />
               </button>
             </div>
 
-            {/* Navegación */}
-            <div className="flex-1 overflow-y-auto">
-              <div className="px-6 py-8 space-y-6">
+            {/* Navegación - SCROLLABLE */}
+            <div className={`flex-1 overflow-y-auto ${isDarkMode ? 'bg-black' : 'bg-white'}`}>
+              <div className="p-4 space-y-1">
                 {[
                   { id: 'about', label: t.nav.about, icon: User },
                   { id: 'craft', label: t.nav.craft, icon: Code2 },
@@ -704,38 +825,31 @@ function App() {
                   { id: 'laboratory', label: t.nav.laboratory, icon: Terminal },
                   { id: 'blog', label: t.nav.blog, icon: BookOpen },
                   { id: 'contact', label: t.nav.contact, icon: Mail }
-                ].map((item, index) => (
+                ].map((item) => (
                   <button
                     key={item.id}
                     onClick={() => scrollToSection(item.id)}
-                    className={`group w-full flex items-center space-x-4 p-4 rounded-2xl transition-all duration-300 text-left ${
-                      activeSection === item.id
-                        ? 'bg-gradient-to-r from-cyan-400/20 to-purple-500/20 border border-cyan-400/30'
-                        : isDarkMode 
-                          ? 'hover:bg-gray-800/50 border border-transparent' 
-                          : 'hover:bg-gray-100/50 border border-transparent'
-                    }`}
-                    style={{ animationDelay: `${index * 0.1}s` }}
+                                          className={`w-full flex items-center space-x-3 p-3 rounded-lg text-left transition-all duration-200 ${
+                        activeSection === item.id
+                          ? isDarkMode
+                            ? 'bg-cyan-500/20 text-cyan-300 border border-cyan-500/30'
+                            : 'bg-cyan-100 text-cyan-800 border border-cyan-200'
+                          : isDarkMode 
+                            ? 'text-gray-200 hover:bg-gray-800 hover:text-white' 
+                            : 'text-gray-800 hover:bg-gray-100 hover:text-gray-900'
+                      }`}
                   >
                     <item.icon 
-                      size={20} 
-                      className={`transition-colors duration-300 ${
-                        activeSection === item.id
-                          ? 'text-cyan-400'
-                          : isDarkMode ? 'text-gray-400 group-hover:text-cyan-400' : 'text-gray-600 group-hover:text-cyan-600'
-                      }`}
+                      size={18} 
+                      className="flex-shrink-0"
                     />
-                    <span className={`font-light text-lg uppercase tracking-wider transition-colors duration-300 ${
-                      activeSection === item.id
-                        ? 'text-cyan-400'
-                        : isDarkMode ? 'text-gray-300 group-hover:text-white' : 'text-gray-700 group-hover:text-gray-900'
-                    }`}>
+                    <span className="font-semibold text-sm">
                       {item.label}
                     </span>
                     {activeSection === item.id && (
                       <ChevronRight 
-                        size={16} 
-                        className="text-cyan-400 ml-auto animate-pulse" 
+                        size={14} 
+                        className="ml-auto flex-shrink-0"
                       />
                     )}
                   </button>
@@ -743,50 +857,51 @@ function App() {
               </div>
             </div>
 
-            {/* Footer del menú lateral */}
-            <div className={`p-6 border-t ${isDarkMode ? 'border-gray-800/30' : 'border-gray-200/30'}`}>
-              <div className="flex justify-center space-x-6">
+            {/* Footer - FIJO */}
+            <div className={`p-4 border-t ${isDarkMode ? 'border-gray-700' : 'border-gray-300'} ${isDarkMode ? 'bg-black' : 'bg-white'}`}>
+              <div className="text-center mb-3">
+                <p className={`text-sm font-semibold ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+                  Conecta conmigo
+                </p>
+              </div>
+              <div className="flex justify-center space-x-4">
                 <a 
                   href="https://github.com/saulhinojosa" 
-                  className={`p-3 rounded-full transition-all duration-300 ${
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`p-2 rounded-lg transition-all duration-200 ${
                     isDarkMode 
                       ? 'text-gray-400 hover:text-cyan-400 hover:bg-gray-800/50' 
-                      : 'text-gray-600 hover:text-cyan-600 hover:bg-gray-100/50'
+                      : 'text-gray-600 hover:text-cyan-600 hover:bg-gray-100'
                   }`}
                 >
-                  <Github size={20} />
+                  <Github size={18} />
                 </a>
                 <a 
                   href="https://linkedin.com/in/saulhinojosa" 
-                  className={`p-3 rounded-full transition-all duration-300 ${
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`p-2 rounded-lg transition-all duration-200 ${
                     isDarkMode 
                       ? 'text-gray-400 hover:text-cyan-400 hover:bg-gray-800/50' 
-                      : 'text-gray-600 hover:text-cyan-600 hover:bg-gray-100/50'
+                      : 'text-gray-600 hover:text-cyan-600 hover:bg-gray-100'
                   }`}
                 >
-                  <Linkedin size={20} />
+                  <Linkedin size={18} />
                 </a>
                 <a 
                   href="mailto:saulhinojosamaldonado@gmail.com" 
-                  className={`p-3 rounded-full transition-all duration-300 ${
+                  className={`p-2 rounded-lg transition-all duration-200 ${
                     isDarkMode 
                       ? 'text-gray-400 hover:text-cyan-400 hover:bg-gray-800/50' 
-                      : 'text-gray-600 hover:text-cyan-600 hover:bg-gray-100/50'
+                      : 'text-gray-600 hover:text-cyan-600 hover:bg-gray-100'
                   }`}
                 >
-                  <Mail size={20} />
+                  <Mail size={18} />
                 </a>
               </div>
             </div>
           </div>
-        </div>
-
-        {/* Overlay del menú móvil */}
-        {isMenuOpen && (
-          <div 
-            className="lg:hidden fixed inset-0 bg-black/50 backdrop-blur-sm z-40 transition-opacity duration-500"
-            onClick={() => setIsMenuOpen(false)}
-          />
         )}
       </nav>
 
@@ -858,9 +973,68 @@ function App() {
             <p className={`text-xl font-light ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>{t.about.subtitle}</p>
           </div>
 
-          <div className="grid lg:grid-cols-3 gap-16 items-start">
-            {/* Descripción y highlights */}
-            <div className="lg:col-span-2 space-y-8">
+          {/* Layout móvil: foto arriba, descripción a la derecha, estadísticas abajo */}
+          <div className="lg:grid lg:grid-cols-2 lg:gap-16 lg:items-start">
+            
+            {/* Foto y descripción - Layout móvil */}
+            <div className="lg:hidden space-y-6">
+              {/* Foto en móvil */}
+              <div className="flex justify-center">
+                <div className="group relative overflow-hidden bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl transition-all duration-500 hover:border-cyan-400/30 w-48 h-64">
+                  <img 
+                    src={profilePhoto} 
+                    alt="Saúl Hinojosa - Ingeniero de Software"
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                  <div className={`absolute inset-0 ${isDarkMode ? 'bg-gradient-to-t from-black/20 via-transparent to-transparent' : 'bg-gradient-to-t from-white/10 via-transparent to-transparent'}`}></div>
+                  <div className="absolute inset-0 bg-gradient-to-t from-cyan-400/10 via-transparent to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+                </div>
+              </div>
+
+              {/* Descripción en móvil */}
+              <div className="space-y-6">
+                <p className={`text-lg leading-relaxed font-light ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+                  {t.about.description}
+                </p>
+                
+                <div className="space-y-4">
+                  {t.about.highlights.map((highlight, index) => (
+                    <div key={index} className="flex items-center space-x-4">
+                      <div className="w-2 h-2 bg-gradient-to-r from-cyan-400 to-purple-500 rounded-full"></div>
+                      <span className={`font-light ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>{highlight}</span>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Estadísticas en móvil */}
+              <div className="relative mt-8">
+                <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-6">
+                  <div className="grid grid-cols-2 gap-6 text-center">
+                    <div>
+                      <div className="text-2xl font-light text-cyan-400 mb-2">5+</div>
+                      <div className={`text-xs font-light ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Años de Experiencia</div>
+                    </div>
+                    <div>
+                      <div className="text-2xl font-light text-purple-400 mb-2">50+</div>
+                      <div className={`text-xs font-light ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Proyectos Completados</div>
+                    </div>
+                    <div>
+                      <div className="text-2xl font-light text-pink-400 mb-2">15+</div>
+                      <div className={`text-xs font-light ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Tecnologías</div>
+                    </div>
+                    <div>
+                      <div className="text-2xl font-light text-orange-400 mb-2">3+</div>
+                      <div className={`text-xs font-light ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Equipos Liderados</div>
+                    </div>
+                  </div>
+                </div>
+                <div className="absolute -inset-1 bg-gradient-to-br from-cyan-400/20 via-purple-500/20 to-pink-500/20 blur-xl opacity-30 rounded-3xl"></div>
+              </div>
+            </div>
+
+            {/* Layout desktop - contenido izquierdo */}
+            <div className="hidden lg:block space-y-8">
               <p className={`text-lg leading-relaxed font-light ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
                 {t.about.description}
               </p>
@@ -874,7 +1048,7 @@ function App() {
                 ))}
               </div>
 
-              {/* Estadísticas */}
+              {/* Estadísticas desktop */}
               <div className="relative mt-12">
                 <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8">
                   <div className="grid grid-cols-2 gap-8 text-center">
@@ -900,28 +1074,20 @@ function App() {
               </div>
             </div>
 
-            {/* Placeholder de imagen profesional */}
-            <div className="relative lg:sticky lg:top-24">
-              <div className="group relative overflow-hidden bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl aspect-[4/5] transition-all duration-500 hover:border-cyan-400/30">
-                {/* Placeholder de imagen */}
-                <div className={`absolute inset-0 flex items-center justify-center ${isDarkMode ? 'bg-gradient-to-br from-gray-900/50 via-gray-800/30 to-gray-900/50' : 'bg-gradient-to-br from-gray-100/50 via-gray-50/30 to-gray-100/50'}`}>
-                  <div className="text-center space-y-4">
-                    {/* Icono de usuario */}
-                    <div className={`w-20 h-20 mx-auto rounded-full border-2 flex items-center justify-center transition-all duration-300 group-hover:scale-110 ${
-                      isDarkMode ? 'border-gray-600 text-gray-400 group-hover:border-cyan-400 group-hover:text-cyan-400' : 'border-gray-400 text-gray-600 group-hover:border-cyan-600 group-hover:text-cyan-600'
-                    }`}>
-                      <User size={32} />
-                    </div>
-                    {/* Texto del placeholder */}
-                    <div className="space-y-2">
-                      <p className={`text-sm font-light uppercase tracking-wider ${isDarkMode ? 'text-gray-500' : 'text-gray-600'}`}>
-                        Foto Profesional
-                      </p>
-                      <p className={`text-xs font-light ${isDarkMode ? 'text-gray-600' : 'text-gray-500'}`}>
-                        Saúl Hinojosa
-                      </p>
-                    </div>
-                  </div>
+            {/* Imagen profesional desktop */}
+            <div className="hidden lg:block relative flex items-start">
+              <div className="group relative overflow-hidden bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl transition-all duration-500 hover:border-cyan-400/30 w-full">
+                {/* Contenedor de imagen profesional */}
+                <div className="relative h-[460px] overflow-hidden">
+                  <img 
+                    src={profilePhoto} 
+                    alt="Saúl Hinojosa - Ingeniero de Software"
+                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-105"
+                  />
+                  {/* Overlay sutil para integración con el diseño */}
+                  <div className={`absolute inset-0 ${isDarkMode ? 'bg-gradient-to-t from-black/20 via-transparent to-transparent' : 'bg-gradient-to-t from-white/10 via-transparent to-transparent'}`}></div>
+                  {/* Overlay hover para efectos interactivos */}
+                  <div className="absolute inset-0 bg-gradient-to-t from-cyan-400/10 via-transparent to-purple-500/10 opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
                 </div>
 
                 {/* Efectos decorativos */}
@@ -993,89 +1159,174 @@ function App() {
             <p className={`text-xl font-light ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>{t.journey.subtitle}</p>
           </div>
 
+          {/* Timeline layout móvil y desktop */}
           <div ref={timelineRef} className="relative">
-            {/* Timeline Line */}
-            <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-gray-800 to-gray-900 rounded-full">
-              <div 
-                ref={progressLineRef}
-                className="w-full bg-gradient-to-b from-cyan-400 via-purple-500 to-pink-500 rounded-full"
-                style={{ height: '100%' }}
-              ></div>
-            </div>
+            
+            {/* Layout móvil */}
+            <div className="lg:hidden mobile-timeline">
+              {/* Timeline Line móvil - a la izquierda */}
+              <div className="absolute left-6 top-0 w-0.5 h-full bg-gradient-to-b from-gray-800 to-gray-900">
+                <div 
+                  className="progress-line w-full bg-gradient-to-b from-cyan-400 via-purple-500 to-pink-500"
+                  style={{ height: '100%' }}
+                ></div>
+              </div>
 
-            {/* Timeline Items */}
-            <div className="space-y-16">
-              {t.journey.experiences.map((experience, index) => (
-                <div key={index} className={`timeline-item flex items-center ${index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'}`}>
-                  {/* Content */}
-                  <div className={`w-5/12 ${index % 2 === 0 ? 'pr-8 text-right' : 'pl-8 text-left'}`}>
-                    <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8 relative">
-                      <div className="flex items-center justify-between mb-4">
-                        <div className={`px-4 py-2 rounded-full text-xs font-light ${
+              {/* Timeline Items móvil */}
+              <div className="space-y-8 pl-16">
+                {t.journey.experiences.map((experience, index) => (
+                  <div key={index} className="timeline-item relative">
+                    {/* Timeline Dot móvil */}
+                    <div className="absolute -left-12 top-4">
+                      <div className={`w-4 h-4 rounded-full border-2 ${
+                        experience.type === 'work' 
+                          ? 'bg-cyan-400 border-cyan-400' 
+                          : 'bg-purple-400 border-purple-400'
+                      } shadow-lg`}></div>
+                    </div>
+
+                    {/* Content móvil */}
+                    <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-2xl p-6">
+                      <div className="flex items-center justify-between mb-3">
+                        <div className={`px-3 py-1 rounded-full text-xs font-light ${
                           experience.type === 'work' 
                             ? 'bg-cyan-400/20 text-cyan-400' 
                             : 'bg-purple-400/20 text-purple-400'
                         }`}>
                           {experience.type === 'work' ? 'Trabajo' : 'Educación'}
                         </div>
-                        <span className={`text-sm font-light ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>
+                        <span className={`text-xs font-light ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>
                           {experience.year}
                         </span>
                       </div>
                       
-                      <h3 className={`text-xl font-light mb-2 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
+                      <h3 className={`text-lg font-light mb-2 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
                         {experience.title}
                       </h3>
                       
-                      <div className={`flex items-center space-x-2 mb-4 ${index % 2 === 0 ? 'justify-end' : 'justify-start'}`}>
-                        {experience.type === 'work' ? <Briefcase size={16} /> : <GraduationCap size={16} />}
+                      <div className="flex items-center space-x-2 mb-3 text-sm">
+                        {experience.type === 'work' ? <Briefcase size={14} /> : <GraduationCap size={14} />}
                         <span className={`font-light ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
                           {experience.company}
                         </span>
-                        <MapPin size={14} className={isDarkMode ? 'text-gray-500' : 'text-gray-600'} />
-                        <span className={`text-sm ${isDarkMode ? 'text-gray-500' : 'text-gray-600'}`}>
+                        <MapPin size={12} className={isDarkMode ? 'text-gray-500' : 'text-gray-600'} />
+                        <span className={`text-xs ${isDarkMode ? 'text-gray-500' : 'text-gray-600'}`}>
                           {experience.location}
                         </span>
                       </div>
                       
-                      <p className={`mb-6 leading-relaxed font-light ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>
+                      <p className={`mb-4 leading-relaxed font-light text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>
                         {experience.description}
                       </p>
                       
-                      <div className="space-y-3 mb-6">
+                      <div className="space-y-2 mb-4">
                         {experience.achievements.map((achievement, achIndex) => (
-                          <div key={achIndex} className={`flex items-start space-x-3 ${index % 2 === 0 ? 'flex-row-reverse space-x-reverse' : ''}`}>
-                            <Star size={14} className="text-yellow-400 mt-1 flex-shrink-0" />
-                            <span className={`text-sm font-light ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+                          <div key={achIndex} className="flex items-start space-x-2">
+                            <Star size={12} className="text-yellow-400 mt-1 flex-shrink-0" />
+                            <span className={`text-xs font-light ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
                               {achievement}
                             </span>
                           </div>
                         ))}
                       </div>
                       
-                      <div className={`flex flex-wrap gap-2 ${index % 2 === 0 ? 'justify-end' : 'justify-start'}`}>
+                      <div className="flex flex-wrap gap-1">
                         {experience.tech.map((tech, techIndex) => (
-                          <span key={techIndex} className={`px-3 py-1 text-xs font-light border rounded-full ${isDarkMode ? 'bg-gray-800/50 text-gray-300 border-gray-700' : 'bg-gray-100/50 text-gray-700 border-gray-300'}`}>
+                          <span key={techIndex} className={`px-2 py-1 text-xs font-light border rounded-full ${isDarkMode ? 'bg-gray-800/50 text-gray-300 border-gray-700' : 'bg-gray-100/50 text-gray-700 border-gray-300'}`}>
                             {tech}
                           </span>
                         ))}
                       </div>
                     </div>
                   </div>
+                ))}
+              </div>
+            </div>
 
-                  {/* Timeline Dot */}
-                  <div className="w-2/12 flex justify-center">
-                    <div className={`w-6 h-6 rounded-full border-4 ${
-                      experience.type === 'work' 
-                        ? 'bg-cyan-400 border-cyan-400/30' 
-                        : 'bg-purple-400 border-purple-400/30'
-                    } shadow-lg`}></div>
+            {/* Layout desktop */}
+            <div className="hidden lg:block desktop-timeline">
+              {/* Timeline Line desktop */}
+              <div className="absolute left-1/2 transform -translate-x-1/2 w-1 h-full bg-gradient-to-b from-gray-800 to-gray-900 rounded-full">
+                <div 
+                  className="progress-line w-full bg-gradient-to-b from-cyan-400 via-purple-500 to-pink-500 rounded-full"
+                  style={{ height: '100%' }}
+                ></div>
+              </div>
+
+              {/* Timeline Items desktop */}
+              <div className="space-y-16">
+                {t.journey.experiences.map((experience, index) => (
+                  <div key={index} className={`timeline-item flex items-center ${index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'}`}>
+                    {/* Content desktop */}
+                    <div className={`w-5/12 ${index % 2 === 0 ? 'pr-8 text-right' : 'pl-8 text-left'}`}>
+                      <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8 relative">
+                        <div className="flex items-center justify-between mb-4">
+                          <div className={`px-4 py-2 rounded-full text-xs font-light ${
+                            experience.type === 'work' 
+                              ? 'bg-cyan-400/20 text-cyan-400' 
+                              : 'bg-purple-400/20 text-purple-400'
+                          }`}>
+                            {experience.type === 'work' ? 'Trabajo' : 'Educación'}
+                          </div>
+                          <span className={`text-sm font-light ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>
+                            {experience.year}
+                          </span>
+                        </div>
+                        
+                        <h3 className={`text-xl font-light mb-2 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
+                          {experience.title}
+                        </h3>
+                        
+                        <div className={`flex items-center space-x-2 mb-4 ${index % 2 === 0 ? 'justify-end' : 'justify-start'}`}>
+                          {experience.type === 'work' ? <Briefcase size={16} /> : <GraduationCap size={16} />}
+                          <span className={`font-light ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+                            {experience.company}
+                          </span>
+                          <MapPin size={14} className={isDarkMode ? 'text-gray-500' : 'text-gray-600'} />
+                          <span className={`text-sm ${isDarkMode ? 'text-gray-500' : 'text-gray-600'}`}>
+                            {experience.location}
+                          </span>
+                        </div>
+                        
+                        <p className={`mb-6 leading-relaxed font-light ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>
+                          {experience.description}
+                        </p>
+                        
+                        <div className="space-y-3 mb-6">
+                          {experience.achievements.map((achievement, achIndex) => (
+                            <div key={achIndex} className={`flex items-start space-x-3 ${index % 2 === 0 ? 'flex-row-reverse space-x-reverse' : ''}`}>
+                              <Star size={14} className="text-yellow-400 mt-1 flex-shrink-0" />
+                              <span className={`text-sm font-light ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
+                                {achievement}
+                              </span>
+                            </div>
+                          ))}
+                        </div>
+                        
+                        <div className={`flex flex-wrap gap-2 ${index % 2 === 0 ? 'justify-end' : 'justify-start'}`}>
+                          {experience.tech.map((tech, techIndex) => (
+                            <span key={techIndex} className={`px-3 py-1 text-xs font-light border rounded-full ${isDarkMode ? 'bg-gray-800/50 text-gray-300 border-gray-700' : 'bg-gray-100/50 text-gray-700 border-gray-300'}`}>
+                              {tech}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Timeline Dot desktop */}
+                    <div className="w-2/12 flex justify-center">
+                      <div className={`w-6 h-6 rounded-full border-4 ${
+                        experience.type === 'work' 
+                          ? 'bg-cyan-400 border-cyan-400/30' 
+                          : 'bg-purple-400 border-purple-400/30'
+                      } shadow-lg`}></div>
+                    </div>
+
+                    {/* Empty Space desktop */}
+                    <div className="w-5/12"></div>
                   </div>
-
-                  {/* Empty Space */}
-                  <div className="w-5/12"></div>
-                </div>
-              ))}
+                ))}
+              </div>
             </div>
           </div>
         </div>
