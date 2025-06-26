@@ -1,0 +1,273 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    font-weight: 300;
+    background: #000000;
+    color: #ffffff;
+  }
+}
+
+@layer utilities {
+  .animate-fade-in {
+    animation: fadeIn 2s ease-out;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(30px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  .bg-gradient-radial {
+    background: radial-gradient(ellipse at center, var(--tw-gradient-stops));
+  }
+  
+  .text-shadow {
+    text-shadow: 0 4px 8px rgba(0, 0, 0, 0.8);
+  }
+
+  .glass-morphism {
+    background: rgba(255, 255, 255, 0.02);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+  }
+
+  .neural-grid {
+    background-image: 
+      linear-gradient(rgba(6, 182, 212, 0.1) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(6, 182, 212, 0.1) 1px, transparent 1px);
+    background-size: 50px 50px;
+  }
+
+  .quantum-blur {
+    filter: blur(0.5px);
+    transition: filter 0.3s ease;
+  }
+
+  .quantum-blur:hover {
+    filter: blur(0px);
+  }
+}
+
+/* Custom scrollbar - Ultra minimal */
+::-webkit-scrollbar {
+  width: 2px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #06b6d4, #8b5cf6);
+  border-radius: 1px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom, #0891b2, #7c3aed);
+}
+
+/* Smooth transitions for all interactive elements */
+* {
+  transition-property: color, background-color, border-color, text-decoration-color, fill, stroke, opacity, box-shadow, transform, filter, backdrop-filter;
+  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+  transition-duration: 300ms;
+}
+
+/* Focus states for accessibility - Minimal and elegant */
+button:focus-visible,
+input:focus-visible,
+textarea:focus-visible,
+a:focus-visible {
+  outline: 1px solid #06b6d4;
+  outline-offset: 2px;
+}
+
+/* Enhanced selection */
+::selection {
+  background: rgba(6, 182, 212, 0.2);
+  color: #ffffff;
+}
+
+/* Minimal loading states */
+@keyframes pulse-minimal {
+  0%, 100% {
+    opacity: 0.4;
+  }
+  50% {
+    opacity: 0.8;
+  }
+}
+
+.pulse-minimal {
+  animation: pulse-minimal 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
+
+/* Geometric animations */
+@keyframes rotate-slow {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.rotate-slow {
+  animation: rotate-slow 20s linear infinite;
+}
+
+/* Glitch effect for special elements */
+@keyframes glitch {
+  0% {
+    transform: translate(0);
+  }
+  20% {
+    transform: translate(-2px, 2px);
+  }
+  40% {
+    transform: translate(-2px, -2px);
+  }
+  60% {
+    transform: translate(2px, 2px);
+  }
+  80% {
+    transform: translate(2px, -2px);
+  }
+  100% {
+    transform: translate(0);
+  }
+}
+
+.glitch:hover {
+  animation: glitch 0.3s;
+}
+
+/* Minimal hover effects */
+.hover-lift {
+  transition: transform 0.3s ease;
+}
+
+.hover-lift:hover {
+  transform: translateY(-2px);
+}
+
+/* Typography enhancements */
+.font-thin {
+  font-weight: 100;
+}
+
+.font-extralight {
+  font-weight: 200;
+}
+
+.tracking-ultra-wide {
+  letter-spacing: 0.5em;
+}
+
+/* Minimal borders */
+.border-minimal {
+  border-width: 0.5px;
+}
+
+/* Advanced gradients */
+.gradient-text {
+  background: linear-gradient(135deg, #06b6d4, #8b5cf6, #ec4899);
+  background-size: 200% 200%;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  animation: gradient-shift 8s ease infinite;
+}
+
+@keyframes gradient-shift {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Particle system enhancements */
+.particle-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.particle-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: radial-gradient(circle at 20% 80%, rgba(6, 182, 212, 0.1) 0%, transparent 50%),
+              radial-gradient(circle at 80% 20%, rgba(139, 92, 246, 0.1) 0%, transparent 50%),
+              radial-gradient(circle at 40% 40%, rgba(236, 72, 153, 0.1) 0%, transparent 50%);
+  pointer-events: none;
+}
+
+/* Minimal form styling */
+input, textarea {
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  color: white;
+  padding: 12px 0;
+  font-weight: 300;
+}
+
+input:focus, textarea:focus {
+  outline: none;
+  border-bottom-color: #06b6d4;
+}
+
+input::placeholder, textarea::placeholder {
+  color: rgba(255, 255, 255, 0.3);
+  font-weight: 300;
+}
+
+/* Minimal button styling */
+.btn-minimal {
+  background: transparent;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  padding: 12px 24px;
+  font-weight: 300;
+  transition: all 0.3s ease;
+}
+
+.btn-minimal:hover {
+  border-color: #06b6d4;
+  color: #06b6d4;
+}
+
+/* Advanced backdrop blur */
+.backdrop-blur-ultra {
+  backdrop-filter: blur(40px);
+}
+
+/* Minimal shadows */
+.shadow-minimal {
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.shadow-minimal-lg {
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+}
