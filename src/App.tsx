@@ -1298,7 +1298,7 @@ function App() {
                 {t.journey.experiences.map((experience, index) => (
                   <div key={index} className={`timeline-item flex items-center ${index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'}`}>
                     {/* Content desktop */}
-                    <div className={`w-5/12 ${index % 2 === 0 ? 'pr-8 text-right' : 'pl-8 text-left'}`}>
+                    <div className={`w-5/12 ${index % 2 === 0 ? 'pr-8 text-left' : 'pl-8 text-left'}`}>
                       <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8 relative">
                         <div className="flex items-center justify-between mb-4">
                           <div className={`px-4 py-2 rounded-full text-xs font-light ${
@@ -1317,7 +1317,7 @@ function App() {
                           {experience.title}
                         </h3>
                         
-                        <div className={`flex items-center space-x-2 mb-4 ${index % 2 === 0 ? 'justify-end' : 'justify-start'}`}>
+                        <div className={`flex items-center space-x-2 mb-4 justify-start`}>
                           {experience.type === 'work' ? <Briefcase size={16} /> : <GraduationCap size={16} />}
                           <span className={`font-light ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
                             {experience.company}
@@ -1343,7 +1343,7 @@ function App() {
                           ))}
                         </div>
                         
-                        <div className={`flex flex-wrap gap-2 ${index % 2 === 0 ? 'justify-end' : 'justify-start'}`}>
+                        <div className={`flex flex-wrap gap-2 justify-start`}>
                           {experience.tech.map((tech, techIndex) => (
                             <span key={techIndex} className={`px-3 py-1 text-xs font-light border rounded-full ${isDarkMode ? 'bg-gray-800/50 text-gray-300 border-gray-700' : 'bg-gray-100/50 text-gray-700 border-gray-300'}`}>
                               {tech}
