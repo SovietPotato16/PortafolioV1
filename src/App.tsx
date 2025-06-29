@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { 
-  Code2, Brain, Database, Globe,Shield, Cpu, Menu, X, ExternalLink, Github, Linkedin, Mail,Calendar,User,Briefcase,BookOpen,ChevronRight,Languages,Star,Terminal,Zap,Target,ArrowUpRight,Play,Pause,Volume2,Sun,Moon,Server,Code,Layers,Network,Lock,Smartphone,MapPin,GraduationCap
+  Code2, Brain, Database, Globe,Shield, Cpu, Menu, X, ExternalLink, Github, Linkedin, Mail,Calendar,User,Briefcase,BookOpen,ChevronRight,Languages,Star,Terminal,Zap,Target,ArrowUpRight,Play,Pause,Volume2,Sun,Moon,Server,Code,Layers,Network,Lock,Smartphone,MapPin,GraduationCap,MessageCircle
 } from 'lucide-react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -18,6 +18,7 @@ const languages: Language[] = [
   { code: 'es', name: 'ES' },
   { code: 'en', name: 'EN' }
 ];
+
 
 const translations = {
   es: {
@@ -183,7 +184,13 @@ const translations = {
       email: 'Email',
       message: 'Mensaje',
       send: 'Enviar',
-      info: 'Información de Contacto'
+      sending: 'Enviando...',
+      info: 'Información de Contacto',
+      success: {
+        title: '¡Gracias por tu mensaje!',
+        subtitle: 'He recibido tu mensaje y te responderé pronto.',
+        button: 'Enviar otro mensaje'
+      }
     }
   },
   en: {
@@ -349,7 +356,13 @@ const translations = {
       email: 'Email',
       message: 'Message',
       send: 'Send',
-      info: 'Contact Information'
+      sending: 'Sending...',
+      info: 'Contact Information',
+      success: {
+        title: 'Thank you for your message!',
+        subtitle: 'I have received your message and will respond soon.',
+        button: 'Send another message'
+      }
     }
   }
 };
@@ -362,6 +375,8 @@ function App() {
   const [activeSection, setActiveSection] = useState('hero');
   const [labFilter, setLabFilter] = useState('all');
   const [blogFilter, setBlogFilter] = useState('all');
+  const [formSubmitted, setFormSubmitted] = useState(false);
+  const [isSubmitting, setIsSubmitting] = useState(false);
   const timelineRef = useRef<HTMLDivElement>(null);
 
   const t = translations[currentLang];
@@ -502,7 +517,7 @@ function App() {
   // Scroll tracking y control del menú móvil
   useEffect(() => {
     const handleScroll = () => {
-      const sections = ['hero', 'about', 'craft', 'journey', 'manifesto', 'projects', 'blog', 'contact'];
+      const sections = ['hero', 'about', 'journey', 'projects', 'blog', 'contact'];
       const scrollPosition = window.scrollY + 150; // Aumentamos offset para mejor detección
 
       // Buscar la sección actual de forma más precisa
@@ -594,6 +609,42 @@ function App() {
         behavior: 'smooth'
       });
     }
+  };
+
+  // Función para manejar el envío del formulario
+  const handleFormSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+
+    const form = e.currentTarget;
+    const formData = new FormData(form);
+
+    try {
+      const response = await fetch('https://formspree.io/f/manjazzd', {
+        method: 'POST',
+        body: formData,
+        headers: {
+          'Accept': 'application/json'
+        }
+      });
+
+      if (response.ok) {
+        setFormSubmitted(true);
+        form.reset(); // Limpiar el formulario
+      } else {
+        throw new Error('Error al enviar el formulario');
+      }
+    } catch (error) {
+      console.error('Error:', error);
+      alert('Hubo un error al enviar el mensaje. Por favor, intenta de nuevo.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  // Función para resetear el formulario
+  const resetForm = () => {
+    setFormSubmitted(false);
   };
 
   const techStack = [
@@ -730,9 +781,7 @@ function App() {
             <div className="hidden lg:flex items-center space-x-8 xl:space-x-12">
               {[
                 { id: 'about', label: t.nav.about },
-                { id: 'craft', label: t.nav.craft },
                 { id: 'journey', label: t.nav.journey },
-                { id: 'manifesto', label: t.nav.manifesto },
                 { id: 'projects', label: t.nav.projects },
                 { id: 'blog', label: t.nav.blog },
                 { id: 'contact', label: t.nav.contact }
@@ -864,9 +913,7 @@ function App() {
               <div className="p-4 space-y-1">
                 {[
                   { id: 'about', label: t.nav.about, icon: User },
-                  { id: 'craft', label: t.nav.craft, icon: Code2 },
                   { id: 'journey', label: t.nav.journey, icon: Briefcase },
-                  { id: 'manifesto', label: t.nav.manifesto, icon: BookOpen },
                   { id: 'projects', label: t.nav.projects, icon: Terminal },
                   { id: 'blog', label: t.nav.blog, icon: BookOpen },
                   { id: 'contact', label: t.nav.contact, icon: Mail }
@@ -980,7 +1027,7 @@ function App() {
               </p>
             </div>
 
-            <div className="flex flex-col sm:flex-row gap-6 justify-center mt-12">
+            <div className="flex justify-center mt-12">
               <button
                 onClick={() => scrollToSection('projects')}
                 className={`group relative px-8 py-4 bg-white/5 backdrop-blur-xl border border-white/10 rounded-full font-light transition-all duration-500 overflow-hidden ${isDarkMode ? 'text-cyan-400 hover:text-black' : 'text-cyan-600 hover:text-white'}`}
@@ -989,16 +1036,6 @@ function App() {
                 <span className="relative flex items-center space-x-2">
                   <span>{t.hero.projects}</span>
                   <ArrowUpRight size={16} className="group-hover:rotate-45 transition-transform duration-300" />
-                </span>
-              </button>
-              
-              <button
-                onClick={() => scrollToSection('manifesto')}
-                className={`group px-8 py-4 bg-white/5 backdrop-blur-xl border border-white/10 rounded-full font-light transition-all duration-300 ${isDarkMode ? 'text-gray-300 hover:text-white hover:border-white/30' : 'text-gray-700 hover:text-gray-900 hover:border-gray-900/30'}`}
-              >
-                <span className="flex items-center space-x-2">
-                  <span>{t.hero.manifesto}</span>
-                  <div className={`w-2 h-2 rounded-full transition-colors duration-300 ${isDarkMode ? 'bg-gray-400 group-hover:bg-white' : 'bg-gray-600 group-hover:bg-gray-900'}`}></div>
                 </span>
               </button>
             </div>
@@ -1345,52 +1382,7 @@ function App() {
         </div>
       </section>
 
-      {/* Manifesto Section */}
-      <section id="manifesto" className="py-20 relative z-10">
-        <div className="max-w-6xl mx-auto px-6 lg:px-8">
-          <div className="text-center mb-20">
-            <h2 className="text-5xl md:text-6xl font-thin mb-8">
-              <span className="bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent">
-                {t.manifesto.title}
-              </span>
-            </h2>
-          </div>
 
-          <div className="max-w-4xl mx-auto">
-            <div className="space-y-16">
-              <div className="relative">
-                <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8">
-                  <div className="absolute -left-4 top-0 w-px h-full bg-gradient-to-b from-cyan-400/50 to-transparent"></div>
-                  <h3 className="text-2xl font-light mb-6 text-cyan-400">{t.manifesto.philosophy}</h3>
-                  <p className={`leading-relaxed font-light text-lg ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
-                    {t.manifesto.philosophyText}
-                  </p>
-                </div>
-              </div>
-
-              <div className="relative">
-                <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8">
-                  <div className="absolute -left-4 top-0 w-px h-full bg-gradient-to-b from-purple-400/50 to-transparent"></div>
-                  <h3 className="text-2xl font-light mb-6 text-purple-400">{t.manifesto.vision}</h3>
-                  <p className={`leading-relaxed font-light text-lg ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
-                    {t.manifesto.visionText}
-                  </p>
-                </div>
-              </div>
-
-              <div className="relative">
-                <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8">
-                  <div className="absolute -left-4 top-0 w-px h-full bg-gradient-to-b from-pink-400/50 to-transparent"></div>
-                  <h3 className="text-2xl font-light mb-6 text-pink-400">{t.manifesto.mission}</h3>
-                  <p className={`leading-relaxed font-light text-lg ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>
-                    {t.manifesto.missionText}
-                  </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
 
       {/* Projects Section */}
       <section id="projects" className="py-20 relative z-10">
@@ -1562,142 +1554,278 @@ function App() {
 
       {/* Contact Section */}
       <section id="contact" className="py-20 relative z-10">
-        <div className={`absolute inset-0 ${isDarkMode ? 'bg-gradient-to-br from-black via-gray-900/30 to-black' : 'bg-gradient-to-br from-white via-gray-50/30 to-white'}`}></div>
-        
-        <div className="relative max-w-5xl mx-auto px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <div className="text-center mb-20">
             <h2 className="text-5xl md:text-6xl font-thin mb-8">
               <span className="bg-gradient-to-r from-cyan-400 to-purple-500 bg-clip-text text-transparent">
                 {t.contact.title}
               </span>
             </h2>
-            <p className={`text-xl font-light ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>{t.contact.subtitle}</p>
+            <p className={`text-xl font-light ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>
+              {t.contact.subtitle}
+            </p>
           </div>
 
           <div className="grid lg:grid-cols-2 gap-16">
             {/* Contact Form */}
             <div className="relative">
               <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8">
-                <form className="space-y-8">
-                  <div className="space-y-2">
-                    <label className={`block text-sm font-light uppercase tracking-wider ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>
-                      {t.contact.name}
-                    </label>
-                    <input
-                      type="text"
-                      className={`w-full bg-transparent border-b py-3 placeholder-gray-500 focus:outline-none transition-colors duration-300 font-light ${
+                {formSubmitted ? (
+                  /* Success Message */
+                  <div className="text-center space-y-8">
+                    <div className="space-y-4">
+                      {/* Success Icon */}
+                      <div className="flex justify-center">
+                        <div className="w-20 h-20 bg-gradient-to-br from-green-400 to-cyan-500 rounded-full flex items-center justify-center">
+                          <svg 
+                            className="w-10 h-10 text-white" 
+                            fill="none" 
+                            stroke="currentColor" 
+                            viewBox="0 0 24 24"
+                          >
+                            <path 
+                              strokeLinecap="round" 
+                              strokeLinejoin="round" 
+                              strokeWidth={2} 
+                              d="M5 13l4 4L19 7" 
+                            />
+                          </svg>
+                        </div>
+                      </div>
+                      
+                      {/* Success Text */}
+                      <div className="space-y-3">
+                        <h3 className={`text-2xl font-light ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
+                          {t.contact.success.title}
+                        </h3>
+                        <p className={`text-base font-light ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>
+                          {t.contact.success.subtitle}
+                        </p>
+                      </div>
+                    </div>
+                    
+                    {/* Reset Button */}
+                    <button
+                      onClick={resetForm}
+                      className={`group relative py-4 px-8 rounded-full font-light text-base transition-all duration-300 border-2 ${
                         isDarkMode 
-                          ? 'border-gray-700 text-white focus:border-cyan-400' 
-                          : 'border-gray-300 text-gray-900 focus:border-cyan-600'
+                          ? 'bg-white/5 border-white/20 text-cyan-400 hover:bg-cyan-400 hover:text-black' 
+                          : 'bg-gray-50/50 border-gray-300 text-cyan-600 hover:bg-cyan-600 hover:text-white'
                       }`}
-                      placeholder="Tu nombre"
-                    />
+                    >
+                      <span className="flex items-center space-x-2">
+                        <span>{t.contact.success.button}</span>
+                        <ArrowUpRight size={16} className="group-hover:rotate-45 transition-transform duration-300" />
+                      </span>
+                    </button>
                   </div>
-                  
-                  <div className="space-y-2">
-                    <label className={`block text-sm font-light uppercase tracking-wider ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>
-                      {t.contact.email}
-                    </label>
-                    <input
-                      type="email"
-                      className={`w-full bg-transparent border-b py-3 placeholder-gray-500 focus:outline-none transition-colors duration-300 font-light ${
-                        isDarkMode 
-                          ? 'border-gray-700 text-white focus:border-cyan-400' 
-                          : 'border-gray-300 text-gray-900 focus:border-cyan-600'
-                      }`}
-                      placeholder="tu@email.com"
-                    />
-                  </div>
-                  
-                  <div className="space-y-2">
-                    <label className={`block text-sm font-light uppercase tracking-wider ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>
-                      {t.contact.message}
-                    </label>
-                    <textarea
-                      rows={6}
-                      className={`w-full bg-transparent border-b py-3 placeholder-gray-500 focus:outline-none transition-colors duration-300 font-light resize-none ${
-                        isDarkMode 
-                          ? 'border-gray-700 text-white focus:border-cyan-400' 
-                          : 'border-gray-300 text-gray-900 focus:border-cyan-600'
-                      }`}
-                      placeholder="Cuéntame sobre tu proyecto..."
-                    ></textarea>
-                  </div>
-                  
-                  <button
-                    type="submit"
-                    className={`group relative w-full py-4 bg-white/5 backdrop-blur-xl border border-white/10 rounded-full font-light transition-all duration-500 overflow-hidden ${
-                      isDarkMode 
-                        ? 'text-cyan-400 hover:text-black' 
-                        : 'text-cyan-600 hover:text-white'
-                    }`}
+                ) : (
+                  /* Contact Form */
+                  <form 
+                    onSubmit={handleFormSubmit}
+                    className="space-y-8"
                   >
-                    <div className="absolute inset-0 bg-gradient-to-r from-cyan-400 to-purple-500 transform -translate-x-full group-hover:translate-x-0 transition-transform duration-500 rounded-full"></div>
-                    <span className="relative flex items-center justify-center space-x-2">
-                      <span>{t.contact.send}</span>
-                      <ArrowUpRight size={16} className="group-hover:rotate-45 transition-transform duration-300" />
-                    </span>
-                  </button>
-                </form>
+                    {/* Name Field */}
+                    <div className="space-y-3">
+                      <label htmlFor="name" className={`block text-sm font-light uppercase tracking-wider ${
+                        isDarkMode ? 'text-gray-400' : 'text-gray-600'
+                      }`}>
+                        {t.contact.name}
+                      </label>
+                      <input
+                        id="name"
+                        type="text"
+                        name="name"
+                        required
+                        disabled={isSubmitting}
+                        className={`w-full bg-transparent border-b-2 border-solid py-4 px-0 text-base transition-all duration-300 font-light focus:outline-none ${
+                          isDarkMode 
+                            ? 'border-gray-700 text-white placeholder-gray-500 focus:border-cyan-400' 
+                            : 'border-gray-300 text-gray-900 placeholder-gray-500 focus:border-cyan-600'
+                        } ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}`}
+                        placeholder="Tu nombre completo"
+                      />
+                    </div>
+                    
+                    {/* Email Field */}
+                    <div className="space-y-3">
+                      <label htmlFor="email" className={`block text-sm font-light uppercase tracking-wider ${
+                        isDarkMode ? 'text-gray-400' : 'text-gray-600'
+                      }`}>
+                        {t.contact.email}
+                      </label>
+                      <input
+                        id="email"
+                        type="email"
+                        name="email"
+                        required
+                        disabled={isSubmitting}
+                        className={`w-full bg-transparent border-b-2 border-solid py-4 px-0 text-base transition-all duration-300 font-light focus:outline-none ${
+                          isDarkMode 
+                            ? 'border-gray-700 text-white placeholder-gray-500 focus:border-cyan-400' 
+                            : 'border-gray-300 text-gray-900 placeholder-gray-500 focus:border-cyan-600'
+                        } ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}`}
+                        placeholder="tu@email.com"
+                      />
+                    </div>
+                    
+                    {/* Message Field */}
+                    <div className="space-y-3">
+                      <label htmlFor="message" className={`block text-sm font-light uppercase tracking-wider ${
+                        isDarkMode ? 'text-gray-400' : 'text-gray-600'
+                      }`}>
+                        {t.contact.message}
+                      </label>
+                      <textarea
+                        id="message"
+                        name="message"
+                        rows={6}
+                        required
+                        disabled={isSubmitting}
+                        className={`w-full bg-transparent border-b-2 border-solid py-4 px-0 text-base transition-all duration-300 font-light resize-none focus:outline-none ${
+                          isDarkMode 
+                            ? 'border-gray-700 text-white placeholder-gray-500 focus:border-cyan-400' 
+                            : 'border-gray-300 text-gray-900 placeholder-gray-500 focus:border-cyan-600'
+                        } ${isSubmitting ? 'opacity-50 cursor-not-allowed' : ''}`}
+                        placeholder="Cuéntame sobre tu proyecto o idea..."
+                      />
+                    </div>
+                    
+                    {/* Submit Button */}
+                    <button
+                      type="submit"
+                      disabled={isSubmitting}
+                      className={`group relative w-full py-4 px-8 rounded-full font-light text-base transition-all duration-500 border-2 ${
+                        isSubmitting
+                          ? 'opacity-50 cursor-not-allowed'
+                          : isDarkMode 
+                            ? 'bg-white/5 border-white/20 text-cyan-400 hover:text-black hover:bg-cyan-400' 
+                            : 'bg-gray-50/50 border-gray-300 text-cyan-600 hover:text-white hover:bg-cyan-600'
+                      }`}
+                    >
+                      <span className="relative flex items-center justify-center space-x-2">
+                        {isSubmitting ? (
+                          <>
+                            <div className="w-4 h-4 border-2 border-current border-t-transparent rounded-full animate-spin"></div>
+                            <span>{t.contact.sending}</span>
+                          </>
+                        ) : (
+                          <>
+                            <span>{t.contact.send}</span>
+                            <ArrowUpRight size={18} className="group-hover:rotate-45 transition-transform duration-300" />
+                          </>
+                        )}
+                      </span>
+                    </button>
+                  </form>
+                )}
               </div>
-              <div className="absolute -inset-1 bg-gradient-to-br from-cyan-400/20 to-purple-500/20 blur-xl opacity-30 rounded-3xl"></div>
+              
+              {/* Form Background Glow */}
+              <div className="absolute -inset-1 bg-gradient-to-br from-cyan-400/10 to-purple-500/10 blur-xl opacity-30 rounded-3xl pointer-events-none"></div>
             </div>
 
             {/* Contact Info */}
-            <div className="space-y-12">
+            <div className="space-y-8">
               <div>
                 <h3 className="text-2xl font-light mb-8 text-cyan-400">
                   {t.contact.info}
                 </h3>
-                <div className="space-y-6">
+                
+                <div className="space-y-4">
+                  {/* Email */}
                   <a 
                     href="mailto:saulhinojosamaldonado@gmail.com"
-                    className={`group flex items-center space-x-4 p-6 bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl transition-all duration-300 hover:border-cyan-400/30`}
+                    className={`group flex items-center space-x-4 p-6 rounded-3xl transition-all duration-300 border ${
+                      isDarkMode 
+                        ? 'bg-white/5 border-white/10 hover:border-cyan-400/30' 
+                        : 'bg-gray-50/50 border-gray-200 hover:border-cyan-600/30'
+                    }`}
                   >
                     <Mail className="text-cyan-400 group-hover:scale-110 transition-transform duration-300" size={20} />
                     <div>
-                      <p className={`font-light ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>Email</p>
-                      <p className={`font-light ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>saulhinojosamaldonado@gmail.com</p>
+                      <p className={`font-light ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
+                        Email
+                      </p>
+                      <p className={`font-light text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>
+                        saulhinojosamaldonado@gmail.com
+                      </p>
                     </div>
                   </a>
                   
+                  {/* LinkedIn */}
                   <a 
                     href="https://linkedin.com/in/saulhinojosa"
-                    className={`group flex items-center space-x-4 p-6 bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl transition-all duration-300 hover:border-cyan-400/30`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`group flex items-center space-x-4 p-6 rounded-3xl transition-all duration-300 border ${
+                      isDarkMode 
+                        ? 'bg-white/5 border-white/10 hover:border-cyan-400/30' 
+                        : 'bg-gray-50/50 border-gray-200 hover:border-cyan-600/30'
+                    }`}
                   >
                     <Linkedin className="text-cyan-400 group-hover:scale-110 transition-transform duration-300" size={20} />
                     <div>
-                      <p className={`font-light ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>LinkedIn</p>
-                      <p className={`font-light ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>@saulhinojosa</p>
+                      <p className={`font-light ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
+                        LinkedIn
+                      </p>
+                      <p className={`font-light text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>
+                        @saulhinojosa
+                      </p>
                     </div>
                   </a>
                   
+                  {/* GitHub */}
                   <a 
                     href="https://github.com/saulhinojosa"
-                    className={`group flex items-center space-x-4 p-6 bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl transition-all duration-300 hover:border-cyan-400/30`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`group flex items-center space-x-4 p-6 rounded-3xl transition-all duration-300 border ${
+                      isDarkMode 
+                        ? 'bg-white/5 border-white/10 hover:border-cyan-400/30' 
+                        : 'bg-gray-50/50 border-gray-200 hover:border-cyan-600/30'
+                    }`}
                   >
                     <Github className="text-cyan-400 group-hover:scale-110 transition-transform duration-300" size={20} />
                     <div>
-                      <p className={`font-light ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>GitHub</p>
-                      <p className={`font-light ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>@saulhinojosa</p>
+                      <p className={`font-light ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
+                        GitHub
+                      </p>
+                      <p className={`font-light text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>
+                        @saulhinojosa
+                      </p>
                     </div>
                   </a>
                 </div>
               </div>
 
-              <div className="relative">
-                <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-6">
-                  <h4 className={`text-lg font-light mb-6 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
-                    Información Adicional
-                  </h4>
-                  <div className={`space-y-4 font-light ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>
-                    <p>📍 Ciudad de México, México</p>
-                    <p>🕐 Zona Horaria: CDMX (UTC-6)</p>
-                    <p>💫 Estado: Disponible</p>
-                    <p>🔬 Enfoque Actual: Automatización de procesos usando LLMs</p>
-                  </div>
+              {/* Additional Info */}
+              <div className={`p-6 rounded-3xl border ${
+                isDarkMode 
+                  ? 'bg-white/5 border-white/10' 
+                  : 'bg-gray-50/50 border-gray-200'
+              }`}>
+                <h4 className={`text-lg font-light mb-4 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
+                  Información Adicional
+                </h4>
+                <div className={`space-y-3 font-light text-sm ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>
+                  <p className="flex items-center space-x-2">
+                    <span>📍</span>
+                    <span>Ciudad de México, México</span>
+                  </p>
+                  <p className="flex items-center space-x-2">
+                    <span>🕐</span>
+                    <span>Zona Horaria: CDMX (UTC-6)</span>
+                  </p>
+                  <p className="flex items-center space-x-2">
+                    <span>💫</span>
+                    <span>Estado: Disponible</span>
+                  </p>
+                  <p className="flex items-center space-x-2">
+                    <span>🔬</span>
+                    <span>Enfoque Actual: Automatización con LLMs</span>
+                  </p>
                 </div>
-                <div className="absolute -inset-1 bg-gradient-to-br from-cyan-400/10 to-purple-500/10 blur-xl opacity-50 rounded-3xl"></div>
               </div>
             </div>
           </div>
@@ -1725,6 +1853,44 @@ function App() {
           </div>
         </div>
       </footer>
+
+      {/* WhatsApp Floating Button */}
+      <a
+        href="https://wa.me/527221772135?text=Hola%20Saúl%2C%20me%20interesa%20contactarte%20sobre%20un%20proyecto"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="fixed bottom-6 right-6 z-50 group"
+        aria-label="Contactar por WhatsApp"
+      >
+        <div className="relative">
+          {/* WhatsApp Button */}
+          <div className="w-14 h-14 bg-green-500 hover:bg-green-600 rounded-full flex items-center justify-center shadow-lg hover:shadow-xl transition-all duration-300 group-hover:scale-110">
+            {/* WhatsApp Icon */}
+            <svg 
+              className="w-8 h-8 text-white" 
+              fill="currentColor" 
+              viewBox="0 0 24 24"
+            >
+              <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
+            </svg>
+          </div>
+
+          {/* Pulse Animation */}
+          <div className="absolute inset-0 bg-green-500 rounded-full animate-ping opacity-20"></div>
+          
+          {/* Tooltip */}
+          <div className={`absolute right-16 top-1/2 transform -translate-y-1/2 px-3 py-2 rounded-lg text-sm font-light whitespace-nowrap opacity-0 group-hover:opacity-100 transition-all duration-300 pointer-events-none ${
+            isDarkMode 
+              ? 'bg-gray-800 text-white border border-gray-700' 
+              : 'bg-white text-gray-900 border border-gray-200 shadow-lg'
+          }`}>
+            Contactar por WhatsApp
+            <div className={`absolute left-full top-1/2 transform -translate-y-1/2 w-0 h-0 border-l-4 border-r-0 border-t-4 border-b-4 border-transparent ${
+              isDarkMode ? 'border-l-gray-800' : 'border-l-white'
+            }`}></div>
+          </div>
+        </div>
+      </a>
     </div>
   );
 }
