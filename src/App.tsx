@@ -35,7 +35,7 @@ const translations = {
       greeting: 'Hola, soy',
       name: 'Saúl Hinojosa',
       title: 'Ingeniero en Software',
-      subtitle: 'Especializado en Data Science, Python, AI, LLMs y desarrollo web. Transformando datos en soluciones inteligentes.',
+      subtitle: 'Especializado en Data Science, Project Manager, IA, Python LLMs y desarrollo web. Transformando datos y software en soluciones inteligentes.',
       manifesto: 'Mi Manifiesto',
       projects: 'Ver Proyectos'
     },
@@ -44,7 +44,7 @@ const translations = {
       subtitle: 'Programador apasionado por la tecnología y la innovación',
       description: 'Soy un desarrollador full-stack especializado en ciencia de datos e inteligencia artificial. Mi pasión radica en crear soluciones tecnológicas que resuelvan problemas reales y generen impacto positivo.',
       highlights: [
-        'Más de 3 años de experiencia en desarrollo en entornos profesionales',
+        'Más de 2 años de experiencia en desarrollo en entornos profesionales',
         'Especialista en Python, APIs, LLMs, Data Science y desarrollo web',
         'Pasion por tecnología y desarrollo',
         'Líder de equipos técnicos', 
@@ -207,7 +207,7 @@ const translations = {
       greeting: 'Hi, I\'m',
       name: 'Saúl Hinojosa',
       title: 'Software Engineer',
-      subtitle: 'Specialized in Data Science, Python, LLMs and web development. Transforming data into intelligent solutions.',
+      subtitle: 'Specialized in Data Science, Project Manager, AI, Python LLMs and web development. Transforming data and software into intelligent solutions.',
       manifesto: 'My Manifesto',
       projects: 'View Projects'
     },
@@ -216,7 +216,7 @@ const translations = {
       subtitle: 'Engineer passionate about technology and innovation',
       description: 'I\'m a full-stack developer specialized in data science and artificial intelligence. My passion lies in creating technological solutions that solve real problems and generate positive impact.',
       highlights: [
-        'Over 3 years of development experience in professional environments',
+        'Over 2 years of development experience in professional environments',
         'Specialist in Python, APIs, LLMs, Data Science and web development',
         'Passion for technology and development',
         'Technical team leader',
@@ -1121,7 +1121,7 @@ function App() {
               <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl p-8">
                 <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 text-center">
                   <div>
-                    <div className="text-3xl font-light text-cyan-400 mb-2">3+</div>
+                    <div className="text-3xl font-light text-cyan-400 mb-2">2+</div>
                     <div className={`text-sm font-light ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>Años de Experiencia</div>
                   </div>
                   <div>
@@ -1504,6 +1504,21 @@ function App() {
                   {label}
                 </button>
               ))}
+            </div>
+          </div>
+
+          {/* Banner "En Desarrollo" */}
+          <div className="mb-16 flex justify-center">
+            <div className={`relative px-8 py-4 rounded-full border-2 border-dashed ${
+              isDarkMode 
+                ? 'border-yellow-400/50 bg-yellow-400/10 text-yellow-400' 
+                : 'border-yellow-500/50 bg-yellow-500/10 text-yellow-600'
+            }`}>
+              <div className="flex items-center space-x-3">
+                <div className="w-3 h-3 bg-yellow-400 rounded-full animate-pulse"></div>
+                <span className="font-light text-lg">En Desarrollo</span>
+                <div className="w-3 h-3 bg-yellow-400 rounded-full animate-pulse"></div>
+              </div>
             </div>
           </div>
 
