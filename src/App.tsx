@@ -594,18 +594,31 @@ function App() {
     }, 300); // Duración de la animación
   };
 
-  // Función de scroll simplificada y confiable
+  // Función de scroll mejorada y confiable
   const scrollToSection = (sectionId: string) => {
-    // Cerrar el menú móvil con animación
-    closeMenu();
-    
     const element = document.getElementById(sectionId);
-    if (element) {
-      const navHeight = 80;
-      
-      // Usar scroll nativo más simple y confiable
+    if (!element) {
+      console.warn(`Element with id "${sectionId}" not found`);
+      return;
+    }
+    
+    const navHeight = 80;
+    const targetPosition = element.offsetTop - navHeight;
+    
+    // Si el menú móvil está abierto, cerrarlo primero y luego hacer scroll
+    if (isMenuOpen) {
+      closeMenu();
+      // Esperar a que termine la animación del menú antes de hacer scroll
+      setTimeout(() => {
+        window.scrollTo({
+          top: targetPosition,
+          behavior: 'smooth'
+        });
+      }, 350); // Un poco más que la duración de la animación del menú (300ms)
+    } else {
+      // Si el menú no está abierto, hacer scroll inmediatamente
       window.scrollTo({
-        top: element.offsetTop - navHeight,
+        top: targetPosition,
         behavior: 'smooth'
       });
     }
@@ -1038,6 +1051,30 @@ function App() {
                   <ArrowUpRight size={16} className="group-hover:rotate-45 transition-transform duration-300" />
                 </span>
               </button>
+            </div>
+
+            {/* Scroll Indicator */}
+            <div className="flex justify-center mt-16">
+              <div className="flex flex-col items-center space-y-2 animate-bounce">
+                <div className={`w-6 h-10 border-2 rounded-full flex justify-center ${
+                  isDarkMode ? 'border-white/30' : 'border-gray-400/50'
+                }`}>
+                  <div className={`w-1 h-3 rounded-full mt-2 animate-pulse ${
+                    isDarkMode ? 'bg-white/50' : 'bg-gray-400/70'
+                  }`}></div>
+                </div>
+                <div className="flex flex-col space-y-1">
+                  <div className={`w-0 h-0 border-l-2 border-r-2 border-t-4 border-transparent ${
+                    isDarkMode ? 'border-t-cyan-400/60' : 'border-t-cyan-600/60'
+                  }`}></div>
+                  <div className={`w-0 h-0 border-l-2 border-r-2 border-t-4 border-transparent ${
+                    isDarkMode ? 'border-t-cyan-400/40' : 'border-t-cyan-600/40'
+                  }`}></div>
+                  <div className={`w-0 h-0 border-l-2 border-r-2 border-t-4 border-transparent ${
+                    isDarkMode ? 'border-t-cyan-400/20' : 'border-t-cyan-600/20'
+                  }`}></div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
