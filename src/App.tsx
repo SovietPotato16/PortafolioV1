@@ -692,11 +692,12 @@ function App() {
       title: 'Análisis de Opinión y Extracción de Puntos de Dolor',
       description: 'Sistema que genera insights relevantes sobre la opinión de los usuarios respecto a sucursales y cajeros automáticos en la Ciudad de México',
       category: 'ai',
-      status: 'Activo',
+      status: 'Solucionando bugs',
       tech: ['Python', 'NLP', 'Sentiment Analysis', 'Streamlit', 'Data Mining'],
       visual: 'https://images.pexels.com/photos/8386440/pexels-photo-8386440.jpeg?auto=compress&cs=tinysrgb&w=800',
       github: '#',
-      demo: 'https://bankdata.streamlit.app/'
+      demo: 'https://bankdata.streamlit.app/',
+      badge: 'Solucionando bugs'
     },
     {
       id: 3,
@@ -730,6 +731,18 @@ function App() {
       visual: 'https://images.pexels.com/photos/196644/pexels-photo-196644.jpeg?auto=compress&cs=tinysrgb&w=800',
       github: '#',
       demo: 'https://digitalorange.com.mx'
+    },
+    {
+      id: 6,
+      title: 'Enki AI',
+      description: 'Libreta y sistema de archivos inteligente optimizado por IA. Una plataforma que organiza automáticamente tus notas, documentos y recursos usando aprendizaje automático para mejorar tu productividad.',
+      category: 'ai',
+      status: 'Próximamente',
+      tech: ['AI', 'Machine Learning', 'File Organization', 'Natural Language Processing', 'React', 'Node.js'],
+      visual: 'https://images.pexels.com/photos/3861969/pexels-photo-3861969.jpeg?auto=compress&cs=tinysrgb&w=800',
+      github: '#',
+      demo: '#',
+      badge: 'Próximamente'
     }
   ];
 
@@ -1453,13 +1466,14 @@ function App() {
           <div className="grid md:grid-cols-2 gap-12">
             {filteredExperiments.map((experiment) => (
               <div key={experiment.id} className="group relative h-full">
-                <a
-                  href={experiment.demo}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="block cursor-pointer h-full"
-                >
-                  <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl overflow-hidden transition-all duration-500 hover:border-cyan-400/30 h-full flex flex-col">
+                {experiment.demo && experiment.demo !== '#' ? (
+                  <a
+                    href={experiment.demo}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block cursor-pointer h-full"
+                  >
+                    <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl overflow-hidden transition-all duration-500 hover:border-cyan-400/30 h-full flex flex-col">
                     <div className="relative overflow-hidden h-64 flex-shrink-0">
                       <img 
                         src={experiment.visual} 
@@ -1471,10 +1485,27 @@ function App() {
                         <div className={`w-2 h-2 rounded-full ${
                           experiment.status === 'Activo' ? 'bg-green-400' :
                           experiment.status === 'Completado' ? 'bg-blue-400' :
-                          experiment.status === 'En desarrollo' ? 'bg-yellow-400' : 'bg-purple-400'
+                          experiment.status === 'En desarrollo' ? 'bg-yellow-400' :
+                          experiment.status === 'Solucionando bugs' ? 'bg-orange-400' :
+                          experiment.status === 'Próximamente' ? 'bg-purple-400' : 'bg-gray-400'
                         }`}></div>
                         <span className={`text-xs font-light ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>{experiment.status}</span>
                       </div>
+                      
+                      {/* Banner especial para proyectos con badges */}
+                      {experiment.badge && (
+                        <div className="absolute top-4 right-4">
+                          <div className={`px-3 py-1 rounded-full text-xs font-light border-2 backdrop-blur-xl ${
+                            experiment.badge === 'Solucionando bugs' 
+                              ? 'bg-orange-400/20 border-orange-400/50 text-orange-300'
+                              : experiment.badge === 'Próximamente'
+                              ? 'bg-purple-400/20 border-purple-400/50 text-purple-300'
+                              : 'bg-gray-400/20 border-gray-400/50 text-gray-300'
+                          }`}>
+                            {experiment.badge}
+                          </div>
+                        </div>
+                      )}
                       
                       {/* Hover overlay con icono de enlace externo */}
                       <div className="absolute inset-0 bg-black/60 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-center justify-center">
@@ -1501,13 +1532,68 @@ function App() {
                       </div>
                       
                       {/* Indicador visual de que es clickeable */}
-                      <div className={`flex items-center space-x-2 text-sm font-light mt-auto ${isDarkMode ? 'text-gray-400 group-hover:text-cyan-400' : 'text-gray-600 group-hover:text-cyan-600'} transition-colors duration-300`}>
-                        <ExternalLink size={16} />
-                        <span>{t.projects.clickToVisit}</span>
-                      </div>
+                      {experiment.demo && experiment.demo !== '#' && (
+                        <div className={`flex items-center space-x-2 text-sm font-light mt-auto ${isDarkMode ? 'text-gray-400 group-hover:text-cyan-400' : 'text-gray-600 group-hover:text-cyan-600'} transition-colors duration-300`}>
+                          <ExternalLink size={16} />
+                          <span>{t.projects.clickToVisit}</span>
+                        </div>
+                      )}
                     </div>
                   </div>
                 </a>
+                ) : (
+                  <div className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl overflow-hidden transition-all duration-500 h-full flex flex-col cursor-default">
+                    <div className="relative overflow-hidden h-64 flex-shrink-0">
+                      <img 
+                        src={experiment.visual} 
+                        alt={experiment.title}
+                        className="w-full h-full object-cover transition-transform duration-700"
+                      />
+                      <div className={`absolute inset-0 ${isDarkMode ? 'bg-gradient-to-t from-black via-transparent to-transparent' : 'bg-gradient-to-t from-white via-transparent to-transparent'}`}></div>
+                      <div className="absolute top-4 left-4 flex items-center space-x-2">
+                        <div className={`w-2 h-2 rounded-full ${
+                          experiment.status === 'Activo' ? 'bg-green-400' :
+                          experiment.status === 'Completado' ? 'bg-blue-400' :
+                          experiment.status === 'En desarrollo' ? 'bg-yellow-400' :
+                          experiment.status === 'Solucionando bugs' ? 'bg-orange-400' :
+                          experiment.status === 'Próximamente' ? 'bg-purple-400' : 'bg-gray-400'
+                        }`}></div>
+                        <span className={`text-xs font-light ${isDarkMode ? 'text-gray-300' : 'text-gray-700'}`}>{experiment.status}</span>
+                      </div>
+                      
+                      {/* Banner especial para proyectos con badges */}
+                      {experiment.badge && (
+                        <div className="absolute top-4 right-4">
+                          <div className={`px-3 py-1 rounded-full text-xs font-light border-2 backdrop-blur-xl ${
+                            experiment.badge === 'Solucionando bugs' 
+                              ? 'bg-orange-400/20 border-orange-400/50 text-orange-300'
+                              : experiment.badge === 'Próximamente'
+                              ? 'bg-purple-400/20 border-purple-400/50 text-purple-300'
+                              : 'bg-gray-400/20 border-gray-400/50 text-gray-300'
+                          }`}>
+                            {experiment.badge}
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                    
+                    <div className="p-8 flex flex-col flex-1">
+                      <h3 className={`text-xl font-light mb-4 ${isDarkMode ? 'text-white' : 'text-gray-900'}`}>
+                        {experiment.title}
+                      </h3>
+                      <p className={`mb-6 leading-relaxed font-light flex-1 ${isDarkMode ? 'text-gray-400' : 'text-gray-600'}`}>
+                        {experiment.description}
+                      </p>
+                      <div className="flex flex-wrap gap-3 mb-6">
+                        {experiment.tech.map((tech, index) => (
+                          <span key={index} className={`px-4 py-2 text-sm font-light border rounded-full ${isDarkMode ? 'bg-gray-800/50 text-gray-300 border-gray-700' : 'bg-gray-100/50 text-gray-700 border-gray-300'}`}>
+                            {tech}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
+                  </div>
+                )}
                 <div className="absolute -inset-1 bg-gradient-to-br from-cyan-400/10 to-purple-500/10 blur-xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-3xl pointer-events-none"></div>
               </div>
             ))}
